@@ -29,28 +29,20 @@ courses = {
 
 def string_reverser(our_string):
     length = len(our_string) - 1
-    inverted = []
     new_str = ""
     for i in range(length, -1, -1):
-        # inverted.append(our_string[i])
         new_str += our_string[i]
-    str1 = ''.join(inverted)
-    # return str1
     return new_str
 
 
-print ("Pass" if ('retaw' == string_reverser('water')) else "Fail")
+print('Pass' if ('retaw' == string_reverser('water')) else "Fail")
 
 
-def reverseArray(a):
+def reverse_array(a):
     length = len(a) - 1
     inverted = []
-    # new_str = ""
     for i in range(length, -1, -1):
         inverted.append(a[i])
-        # new_str += our_string[i]
-    # str1 = ''.join(inverted)
-    # return str1
     return inverted
 
 # swift
