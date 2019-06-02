@@ -3,16 +3,59 @@ class Node:
         self.value = value
         self.next = None
 
-    def append(self, node):
-        #  1 identify the last node.
-        # the last node is the one that points to None
-        if self.next is None:
-            self.next = node
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        #tail
+        #count
+
+    def append(self, value):
+        if self.head is None:
+            self.head = Node(value)
             return
-        actual_node = self.next
-        while actual_node.next is not None:
+
+        # Move to the tail (the last node)
+        node = self.head
+        while node.next:
+            node = node.next
+
+        node.next = Node(value)
+        return
+
+    def print_linked_list(self):
+        # #  1 identify the last node.
+        # # the last node is the one that points to None
+        # if self.next is None:
+        #     self.next = node
+        #     return
+        actual_node = self.head
+        while actual_node:
+            print(actual_node.value)
             actual_node = actual_node.next
-        actual_node.next = node
+        return
+
+    def to_list(self):
+        output_list = []
+        # if self.head is None:
+        #     return output_list
+        current_node = self.head
+        while current_node:
+            output_list.append(current_node.value)
+            current_node = current_node.next
+        return output_list
+
+
+
+# Test your method here
+linked_list = LinkedList()
+linked_list.append(3)
+linked_list.append(2)
+linked_list.append(-1)
+linked_list.append(0.2)
+print(linked_list.print_linked_list())
+print(linked_list.to_list())
+
+print ("Pass" if(linked_list.to_list() == [3, 2, -1, 0.2]) else "Fail")
 
 
 def print_linked_list(self):
@@ -173,4 +216,7 @@ input_list = [441.,  65.,  90., 441., 122.,  88.,  61.,  81., 104., 108.,  90.,
 # print(head.next.next.next.value)
 
 # head.print_linked_list()
+
+
+
 
