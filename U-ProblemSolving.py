@@ -1,11 +1,11 @@
 ###
-### Define a simple nextDay procedure, that assumes
+### Define a simple next_day procedure, that assumes
 ### every month has 30 days.
 ###
 ### For example:
-###    nextDay(1999, 12, 30) => (2000, 1, 1)
-###    nextDay(2013, 1, 30) => (2013, 2, 1)
-###    nextDay(2012, 12, 30) => (2013, 1, 1)  (even though December really has 31 days)
+###    next_day(1999, 12, 30) => (2000, 1, 1)
+###    next_day(2013, 1, 30) => (2013, 2, 1)
+###    next_day(2012, 12, 30) => (2013, 1, 1)  (even though December really has 31 days)
 ###
 
 
@@ -25,12 +25,12 @@ def next_day(year, month, day):
     return year, month, day
 
 
-print(nextDay(2012, 12, 30))  # => (2013, 1, 1)  (even though December really has 31 days)
+print(next_day(2012, 12, 30))  # => (2013, 1, 1)  (even though December really has 31 days)
 
-# print nextDay(1999, 12, 30)
-# print nextDay(2013, 1, 30) #=> (2013, 2, 1)
-# Nice job! Test case nextDay(2012, 1, 1) is correct!
-# Nice job! Test case nextDay(2012, 4, 30) is correct!
-# Nice job! Test case nextDay(2012, 12, 1) is correct!
-# Nice job! Test case nextDay(1999, 12, 30) is correct!
-# Nice job! Test case nextDay(2012, 12, 30) is correct!
+# print next_day(1999, 12, 30)
+# print next_day(2013, 1, 30) #=> (2013, 2, 1)
+# Nice job! Test case next_day(2012, 1, 1) is correct!
+# Nice job! Test case next_day(2012, 4, 30) is correct!
+# Nice job! Test case next_day(2012, 12, 1) is correct!
+# Nice job! Test case next_day(1999, 12, 30) is correct!
+# Nice job! Test case next_day(2012, 12, 30) is correct!
