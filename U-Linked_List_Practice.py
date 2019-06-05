@@ -10,6 +10,44 @@ class LinkedList:
         self.tail = self.head
         self.length = 0
 
+    def __iter__(self):
+        """
+        https://rszalski.github.io/magicmethods/
+
+        if you want your object to be iterable, you'll have to define __iter__,
+        which returns an iterator.
+        That iterator must conform to an iterator protocol,
+        which requires iterators to have methods called
+        __iter__(returning itself) and next
+
+        :return: yield node.value
+        """
+        node = self.head
+        while node:
+            yield node.value
+            node = node.next
+
+    def __repr__(self):
+        """
+        It's often useful to have a string representation of a class.
+        Defines behavior for when repr() is called on an instance of your class. The major difference between str() and
+        repr() is intended audience. repr() is intended to produce output that is mostly machine-readable (in many cases,
+         it could be valid Python code even), whereas str() is intended to be human-readable.
+        :return:
+        """
+        return str([v for v in self])
+
+    def append(self, value):
+        if self.head is None:
+            self.head = Node(value)
+            return
+
+        node = self.head
+        while node.next:
+            node = node.next
+
+        node.next = Node(value)
+
     def prepend(self, value):
         """ Prepend a value to the beginning of the list. """
         self.length += 1
@@ -113,6 +151,7 @@ class LinkedList:
 
 # Test prepend
 linked_list = LinkedList()
+
 linked_list.prepend(1)
 assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 1, f"list contents: {linked_list.to_list()}"
@@ -120,7 +159,7 @@ linked_list.append(3)
 linked_list.prepend(2)
 assert linked_list.to_list() == [2, 1, 3], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 3, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # Test append
 linked_list = LinkedList()
@@ -130,7 +169,7 @@ assert linked_list.length == 1, f"list contents: {linked_list.to_list()}"
 linked_list.append(3)
 assert linked_list.to_list() == [1, 3], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 2, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # Test search
 linked_list.prepend(2)
@@ -140,7 +179,7 @@ linked_list.append(3)
 assert linked_list.length == 6, f"list contents: {linked_list.to_list()}"
 assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()}"
 assert linked_list.search(4).value == 4, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # Test remove
 linked_list.remove(1)
@@ -154,49 +193,49 @@ assert linked_list.to_list() == [2, 1, 4], f"list contents: {linked_list.to_list
 assert linked_list.length == 3, f"list contents: {linked_list.to_list()}"
 # linked_list.append(1)
 # assert linked_list.to_list() == [2, 1, 4, 1], f"list contents: {linked_list.to_list()}"
-# print(linked_list.tail.value)
-# print(linked_list.tail.next)
+# # print(linked_list.tail.value)
+# # print(linked_list.tail.next)
 # assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()}"
 # linked_list.append(8)
 # assert linked_list.to_list() == [2, 1, 4, 1, 8], f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # Test pop
 value = linked_list.pop()
 assert value == 2, f"list contents: {linked_list.to_list()}"
 assert linked_list.head.value == 1, f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 2, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # Test insert
 linked_list.insert(5, 0)
 assert linked_list.to_list() == [5, 1, 4], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 3, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 linked_list.insert(2, 1)
 assert linked_list.to_list() == [5, 2, 1, 4], f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 linked_list.insert(3, 3)
 assert linked_list.to_list() == [5, 2, 1, 3, 4], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 5, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 linked_list.insert(9, 100)
 assert linked_list.to_list() == [5, 2, 1, 3, 4, 9], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 6, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 linked_list.insert(7, 4)
 assert linked_list.to_list() == [5, 2, 1, 3, 7, 4, 9], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 7, f"list contents: {linked_list.to_list()}"
-print(linked_list.to_list())
+# print(linked_list.to_list())
 
 # # Test size
 assert linked_list.size() == 7, f"list contents: {linked_list.to_list()}"
-
-
+print(linked_list.__repr__())
+print([*linked_list.__iter__()])
 # Solution
 
 class LinkedListUdacity:
@@ -312,4 +351,5 @@ class LinkedListUdacity:
             out.append(node.value)
             node = node.next
         return out
+
 
