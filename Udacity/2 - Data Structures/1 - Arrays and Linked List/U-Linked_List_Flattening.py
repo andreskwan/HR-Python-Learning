@@ -211,11 +211,20 @@ def sort(unsorted_list):
 
     first = unsorted_list.pop()
     second = unsorted_list.pop()
-    if first < second:
-        return unsorted_list
-    new_list = LinkedList(head=second)
-    new_list.append(second)
-    return new_list
+    third = unsorted_list.pop()
+    # new_list = LinkedList(head=None)
+    if third is None:
+        if first < second:
+            new_list = LinkedList(head=Node(first))
+            new_list.append_value(second)
+        else:
+            new_list = LinkedList(head=Node(second))
+            new_list.append_value(first)
+        return new_list
+    # else:
+        # identify order
+        
+
     # value = list.pop()
     # new_list = LinkedList(head=Node(value))
     # current_node = list.head
@@ -235,32 +244,33 @@ def sort(unsorted_list):
     #     current_node = next_node
 
 
-# def test_sort():
-#     test_cases = [([], None),
-#                   ([1], [1]),
-#                   ([1, 2], [1, 2]),
-#                   ([2, 1], [1, 2])]
-#
-#     for (args, answer) in test_cases:
-#         print("---------------------")
-#         temporal_list = LinkedList(init_list=args)
-#         result = sort(temporal_list)
-#         temporal_answer = LinkedList(init_list=answer)
-#         if result is not None and temporal_answer is not None:
-#             print("result: "+str(result.to_list()) + " and answer: "+str(temporal_answer.to_list()))
-#             if result.to_list() == temporal_answer.to_list():
-#                 print("Test case passed!")
-#             else:
-#                 print("Test with data:", args, "failed")
-#         else:
-#             print("result: " + str(result) + " and answer: " + str(answer))
-#             if result == answer:
-#                 print("Test case passed!")
-#             else:
-#                 print("Test with data:", args, "failed")
+def test_sort():
+    test_cases = [([], None),
+                  ([1], [1]),
+                  ([1, 2], [1, 2]),
+                  ([2, 1], [1, 2]),
+                  ([2, 3, 1], [1, 2, 3])]
+
+    for (args, answer) in test_cases:
+        print("---------------------")
+        temporal_list = LinkedList(init_list=args)
+        result = sort(temporal_list)
+        temporal_answer = LinkedList(init_list=answer)
+        if result is not None and temporal_answer is not None:
+            print("result: "+str(result.to_list()) + " and answer: "+str(temporal_answer.to_list()))
+            if result.to_list() == temporal_answer.to_list():
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+        else:
+            print("result: " + str(result) + " and answer: " + str(answer))
+            if result == answer:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
 
 
-# test_sort()
+test_sort()
 
 
 # def merge(list1, list2):
