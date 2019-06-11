@@ -94,6 +94,11 @@ class LinkedList:
         the previous node
         - because I need to append the next node of the node is going to be removed to it
         """
+        if value == self.head.value and self.length == 1:
+            self.length = 0
+            self.head = None
+            self.tail = None
+            return
         current_node = self.head
         while current_node:  #
             if current_node.value == value:
@@ -164,53 +169,146 @@ class LinkedList:
                 return True
         return False
 
-
-def merge(list1, list2):
-    list1.tail.next = list2.head
-    list1.tail = list2.tail
-    return list1
+# def is_equal(self):
 
 
-def sort(list):
-    temporal_node = list.head
+def test_pop():
+    test_cases = [([],      (None, None)),
+                  ([1],     (1, None)),
+                  ([1, 2],  (1, [2])),
+                  ([2, 1],  (2, [1])),
+                  ([2, 1, 3],  (2, [1, 3]))]
 
-    return list1
+    for (args, answer) in test_cases:
+        print("---------------------")
+        temporal_list = LinkedList(init_list=args)
+        print("temporal_list: "+str(temporal_list.to_list()))
+        pop_value = temporal_list.pop()
+        value_answer = answer[0]
+        temporal_answer = LinkedList(init_list=answer[1])
+        if pop_value is not None and value_answer is not None:
+            # print("temporal_list: "+str(temporal_list.to_list()) + " and temporal_answer: "+str(temporal_answer.to_list()))
+            print("pop_value: " + str(pop_value) + " and answer: " + str(answer[0]))
+            if temporal_answer.to_list() == temporal_answer.to_list():
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+        else:
+            print("pop_value: " + str(pop_value) + " and answer: " + str(answer[0]))
+            if pop_value == answer[1]:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
 
-class NestedLinkedList(LinkedList):
-    def flatten(self):
-        """
 
-        :rtype: LinkedList
-        """
-        # TODO: Implement this method to flatten the linked list in ascending sorted order.
-        pass
+# test_pop()
+
+def sort(unsorted_list):
+    if 0 == unsorted_list.length:
+        return None
+    if 1 == unsorted_list.length:
+        return unsorted_list
+
+    first = unsorted_list.pop()
+    second = unsorted_list.pop()
+    if first < second:
+        return unsorted_list
+    new_list = LinkedList(head=second)
+    new_list.append(second)
+    return new_list
+    # value = list.pop()
+    # new_list = LinkedList(head=Node(value))
+    # current_node = list.head
+    # new_value = list.head.next.value
+    # while current_node:
+    #     if current_node.value > next_node.value:
+    #         current_node.next = None
+    #         temporal = next_node            # 8 -> 1 -> ... | (9) -> 8 # to preserve the tail
+    #         current_node.next = temporal.next
+    #         next_node.next = current_node
+    #         # next_node.next = temporal.next
+    #         # temporal_node = current_node  # (9) -> 8 | 7 -> 9
+    #         # next_node = temporal_node     # 8 -> 1 | 9 -> 8
+    #         # next_node.next = None         # 8 -> None
+    #         # current_node = next_node      # 7 -> (8) -> None
+    #         # current_node.next = temporal_node.next  # (8) -> 8
+    #     current_node = next_node
 
 
-# First Test scenario
-linked_list = LinkedList(head=Node(1))
-# linked_list.append_value(3)
-# linked_list.append_value(5)
-linked_list.append_value(Node(3))
-linked_list.append_value(Node(5))
-
-# To test merge
-# print(linked_list.to_list())
+# def test_sort():
+#     test_cases = [([], None),
+#                   ([1], [1]),
+#                   ([1, 2], [1, 2]),
+#                   ([2, 1], [1, 2])]
 #
-# linked_list2 = LinkedList(head=Node(7))
-# linked_list2.append(Node(9))
-# linked_list2.append(Node(8))
-# # linked_list2.append_value(4)
-# # linked_list2.append_value(8)
+#     for (args, answer) in test_cases:
+#         print("---------------------")
+#         temporal_list = LinkedList(init_list=args)
+#         result = sort(temporal_list)
+#         temporal_answer = LinkedList(init_list=answer)
+#         if result is not None and temporal_answer is not None:
+#             print("result: "+str(result.to_list()) + " and answer: "+str(temporal_answer.to_list()))
+#             if result.to_list() == temporal_answer.to_list():
+#                 print("Test case passed!")
+#             else:
+#                 print("Test with data:", args, "failed")
+#         else:
+#             print("result: " + str(result) + " and answer: " + str(answer))
+#             if result == answer:
+#                 print("Test case passed!")
+#             else:
+#                 print("Test with data:", args, "failed")
+
+
+# test_sort()
+
+
+# def merge(list1, list2):
+#     list1.tail.next = list2.head
+#     list1.tail = list2.tail
+#     # sort(list1)
+# #     next_node = current_node.next
+
+# class NestedLinkedList(LinkedList):
+#     def flatten(self):
+#         """
 #
-# linkedList3 = merge(linked_list, linked_list2)
-# print(linkedList3.to_list())
-
-nested_linked_list = NestedLinkedList(Node(linked_list))
-
-second_linked_list = LinkedList(Node(2))
-second_linked_list.append_value(4)
-
-nested_linked_list.append_value(Node(second_linked_list))
-
-solution = nested_linked_list.flatten()
-assert solution == [1, 2, 3, 4, 5]
+#         :rtype: LinkedList
+#         """
+#         # TODO: Implement this method to flatten the linked list in ascending sorted order.
+#         pass
+#
+#
+# array = [1]
+# list1 = LinkedList(init_list=array)
+# list1.pop()
+#
+#
+# # # First Test scenario
+# # linked_list = LinkedList(head=Node(1))
+# # linked_list.append_value(3)
+# # linked_list.append_value(5)
+# # # linked_list.append_value(Node(3))
+# # # linked_list.append_value(Node(5))
+# #
+# # # To test merge
+# # # print(linked_list.to_list())
+# #
+# # linked_list2 = LinkedList(head=Node(7))
+# # linked_list2.append(Node(9))
+# # linked_list2.append(Node(8))
+# # # linked_list2.append_value(4)
+# # # linked_list2.append_value(8)
+# #
+# # merge(linked_list2, linked_list)
+# # print(linkedList3.to_list())
+#
+# # nested_linked_list = NestedLinkedList(Node(linked_list))
+# #
+# # second_linked_list = LinkedList(Node(2))
+# # second_linked_list.append_value(4)
+# #
+# # nested_linked_list.append_value(Node(second_linked_list))
+# #
+# # solution = nested_linked_list.flatten()
+# # assert solution == [1, 2, 3, 4, 5]
