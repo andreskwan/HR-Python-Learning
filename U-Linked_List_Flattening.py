@@ -5,13 +5,13 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, init_list=None):
-        self.head = None
+    def __init__(self, head: Node = None, init_list=None):
+        self.head = head
         self.tail = self.head
         self.length = 0
         if init_list:
             for value in init_list:
-                self.append(value)
+                self.append_value(value)
 
     def __iter__(self):
         """
@@ -51,7 +51,7 @@ class LinkedList:
         self.head = Node(value)
         self.tail = self.head
 
-    def append(self, value):
+    def append_value(self, value):
         """ Append a value to the end of the list. """
         self.length += 1
         new_node = Node(value)
@@ -62,6 +62,18 @@ class LinkedList:
             return
         if self.tail:
             self.tail.next = new_node
+            self.tail = self.tail.next
+
+    def append(self, node: Node):
+        """ Append a value to the end of the list. """
+        self.length += 1
+        # print("id(node):" + str(id(node)) + " - node.value: " + str(node.value))
+        if self.head is None:
+            self.head = node
+            self.tail = self.head
+            return
+        if self.tail:
+            self.tail.next = node
             self.tail = self.tail.next
 
     def search(self, value):
@@ -113,7 +125,7 @@ class LinkedList:
             self.prepend(value)
             return
         if self.length < pos:
-            self.append(value)
+            self.append_value(value)
             return
         current_node = self.head
         position = 1
@@ -153,11 +165,44 @@ class LinkedList:
 
 
 def merge(list1, list2):
-    # TODO: Implement this function so that it merges the two linked lists in a single, sorted linked list.
-    pass
+    list1.tail.next = list2.head
+    list1.tail = list2.tail
+    return list1
 
 
 class NestedLinkedList(LinkedList):
     def flatten(self):
+        """
+
+        :rtype: LinkedList
+        """
         # TODO: Implement this method to flatten the linked list in ascending sorted order.
         pass
+
+
+# First Test scenario
+linked_list = LinkedList(head=Node(1))
+linked_list.append_value(3)
+linked_list.append_value(5)
+# linked_list.append_value(Node(3))
+# linked_list.append_value(Node(5))
+print(linked_list.to_list())
+
+linked_list2 = LinkedList(head=Node(7))
+linked_list2.append(Node(9))
+linked_list2.append(Node(8))
+# linked_list2.append_value(4)
+# linked_list2.append_value(8)
+
+linkedList3 = merge(linked_list, linked_list2)
+print(linkedList3.to_list())
+
+# # nested_linked_list = NestedLinkedList(Node(linked_list))
+#
+# second_linked_list = LinkedList(Node(2))
+# second_linked_list.append_value(4)
+#
+# nested_linked_list.append_value(Node(second_linked_list))
+#
+# solution = nested_linked_list.flatten()
+# assert solution == [1,2,3,4,5]
