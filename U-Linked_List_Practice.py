@@ -37,17 +37,6 @@ class LinkedList:
         """
         return str([v for v in self])
 
-    def append(self, value):
-        if self.head is None:
-            self.head = Node(value)
-            return
-
-        node = self.head
-        while node.next:
-            node = node.next
-
-        node.next = Node(value)
-
     def prepend(self, value):
         """ Prepend a value to the beginning of the list. """
         self.length += 1
@@ -238,6 +227,7 @@ print(linked_list.__repr__())
 print([*linked_list.__iter__()])
 # Solution
 
+
 class LinkedListUdacity:
     def __init__(self):
         self.head = None
@@ -282,7 +272,6 @@ class LinkedListUdacity:
             node = node.next
 
         raise ValueError("Value not found in the list.")
-
 
     def remove(self, value):
         """ Delete the first node with the desired data. """
