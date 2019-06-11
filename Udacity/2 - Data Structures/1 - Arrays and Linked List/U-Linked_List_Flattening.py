@@ -86,13 +86,14 @@ class LinkedList:
         return None
 
     def remove(self, value):
-        """ Remove first occurrence of value. """
-        # find the node
-        # if not found - None
-        # if found
-        # - I need to know
-        # the previous node
-        # - because I need to append the next node of the node is going to be removed to it
+        """ Remove first occurrence of value.
+        find the node
+        if not found - None
+        if found
+        - I need to know
+        the previous node
+        - because I need to append the next node of the node is going to be removed to it
+        """
         current_node = self.head
         while current_node:  #
             if current_node.value == value:
@@ -170,6 +171,11 @@ def merge(list1, list2):
     return list1
 
 
+def sort(list):
+    temporal_node = list.head
+
+    return list1
+
 class NestedLinkedList(LinkedList):
     def flatten(self):
         """
@@ -182,27 +188,29 @@ class NestedLinkedList(LinkedList):
 
 # First Test scenario
 linked_list = LinkedList(head=Node(1))
-linked_list.append_value(3)
-linked_list.append_value(5)
-# linked_list.append_value(Node(3))
-# linked_list.append_value(Node(5))
-print(linked_list.to_list())
+# linked_list.append_value(3)
+# linked_list.append_value(5)
+linked_list.append_value(Node(3))
+linked_list.append_value(Node(5))
 
-linked_list2 = LinkedList(head=Node(7))
-linked_list2.append(Node(9))
-linked_list2.append(Node(8))
-# linked_list2.append_value(4)
-# linked_list2.append_value(8)
+# To test merge
+# print(linked_list.to_list())
+#
+# linked_list2 = LinkedList(head=Node(7))
+# linked_list2.append(Node(9))
+# linked_list2.append(Node(8))
+# # linked_list2.append_value(4)
+# # linked_list2.append_value(8)
+#
+# linkedList3 = merge(linked_list, linked_list2)
+# print(linkedList3.to_list())
 
-linkedList3 = merge(linked_list, linked_list2)
-print(linkedList3.to_list())
+nested_linked_list = NestedLinkedList(Node(linked_list))
 
-# # nested_linked_list = NestedLinkedList(Node(linked_list))
-#
-# second_linked_list = LinkedList(Node(2))
-# second_linked_list.append_value(4)
-#
-# nested_linked_list.append_value(Node(second_linked_list))
-#
-# solution = nested_linked_list.flatten()
-# assert solution == [1,2,3,4,5]
+second_linked_list = LinkedList(Node(2))
+second_linked_list.append_value(4)
+
+nested_linked_list.append_value(Node(second_linked_list))
+
+solution = nested_linked_list.flatten()
+assert solution == [1, 2, 3, 4, 5]
