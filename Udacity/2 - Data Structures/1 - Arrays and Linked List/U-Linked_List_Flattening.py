@@ -208,25 +208,23 @@ def sort(unsorted_list):
         return None
     if 1 == unsorted_list.length:
         return unsorted_list
-
     first = unsorted_list.pop()
     second = unsorted_list.pop()
-    third = unsorted_list.pop()
-    # new_list = LinkedList(head=None)
-    if third is None:
-        if first < second:
-            new_list = LinkedList(head=Node(first))
-            new_list.append_value(second)
-        else:
-            new_list = LinkedList(head=Node(second))
-            new_list.append_value(first)
-        return new_list
+    sorted_list = LinkedList(Node(first))
+    curent_node = sorted_list.head
+
+    if curent_node.value < second:
+        sorted_list.append_value(second)
+    else:
+        if curent_node == sorted_list.head:
+            sorted_list.prepend(second)
+    return sorted_list
     # else:
         # identify order
         
 
     # value = list.pop()
-    # new_list = LinkedList(head=Node(value))
+    # sorted_list = LinkedList(head=Node(value))
     # current_node = list.head
     # new_value = list.head.next.value
     # while current_node:
