@@ -1,5 +1,6 @@
 import random
 
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -361,6 +362,8 @@ def sort(unsorted_list):
         if value < current.value:
             sorted_list.prepend(value)
             continue
+        # TODO: how to split in a half the sorted_list
+        # so I could inser faster a new value?
         while current.value < value and current.next is not None:
             previous = current
             current = current.next
@@ -415,10 +418,44 @@ def test_sort():
                 print("Test with data:", args, "failed")
 
 
-test_sort()
+# test_sort()
 
 
 def merge(list1, list2):
-    list1.tail.next = list2.head
-    list1.tail = list2.tail
-    return sort(list1)
+    if list1.length == 0 and list2.length == 0:
+        return None
+    if list1.length is not 0:
+        list1.tail.next = list2.head
+        list1.tail = list2.tail
+        return sort(list1)
+    else:
+        return sort(list2)
+
+
+def test_merge():
+    test_cases = [(([], []), None),
+                  (([], [4, 7, 1, 0]), [0, 1, 4, 7]),
+                  (([4, 7, 1, 0], []), [0, 1, 4, 7]),
+                  (([5, 3, 1], [9, 4, 33]), [1, 3, 4, 5, 9, 33])]
+
+    for (args, answer) in test_cases:
+        print("---------------------")
+        list1 = LinkedList(init_list=args[0])
+        list2 = LinkedList(init_list=args[1])
+        result = merge(list1, list2)
+        if result is not None and answer is not None:
+            print("input: " + str(args) + " | expected answer: " + str(answer) + " | result: " + str(
+                result.to_list()))
+            if result.to_list() == answer:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+        else:
+            print("result: " + str(result) + " and answer: " + str(answer))
+            if result == answer:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+
+
+test_merge()
