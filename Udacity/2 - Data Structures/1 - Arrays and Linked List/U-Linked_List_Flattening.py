@@ -3,15 +3,21 @@ import random
 
 class Node:
     def __init__(self, value):
+        # if value is None:
+        #     return None
         self.value = value
         self.next = None
 
 
-class LinkedList:
+class LinkedList(Node):
     def __init__(self, head: Node = None, init_list=None):
+        # if head is None:
+        #     if len(init_list) is 0:
+        #         return None
         self.head = head
         self.tail = self.head
         self.length = 0
+
         if init_list:
             for value in init_list:
                 self.append_value(value)
@@ -422,6 +428,12 @@ def test_sort():
 
 
 def merge(list1, list2):
+    if list1 is None and list2 is None:
+        return None
+    if list1 is None:
+        return sort(list2)
+    if list2 is None:
+        return sort(list1)
     if list1.length == 0 and list2.length == 0:
         return None
     if list1.length is not 0:
@@ -458,4 +470,70 @@ def test_merge():
                 print("Test with data:", args, "failed")
 
 
-test_merge()
+# test_merge()
+
+
+# class NestedLinkedList(LinkedList):
+#     def flatten(self):
+#         # if self.size() is 0:
+#         #     return None
+#         return merge(self.head.value, self.head.next.value)
+
+class NestedLinkedList(LinkedList):
+    def flatten(self):
+        return self._flatten(self.head)
+
+    def _flatten(self, node):
+        if node.next is None:
+            return merge(node.value, None)
+        return merge(node.value, self._flatten(node.next))
+
+
+def test_flatten():
+    test_cases = [
+                  (([1], [2]), [1, 2]),
+                  (([1, 3, 5], [2, 4]), [1, 2, 3, 4, 5])]
+    # (([], [4, 7, 1, 0]), [0, 1, 4, 7]),
+    # (([4, 7, 1, 0], []), [0, 1, 4, 7]),
+    # (([5, 3, 1], [9, 4, 33]), [1, 3, 4, 5, 9, 33])]
+
+    for (args, answer) in test_cases:
+        print("---------------------")
+        # for list in args:
+        list1 = LinkedList(init_list=args[0])
+        list2 = LinkedList(init_list=args[1])
+        nested = NestedLinkedList(head=Node(list1))
+        nested.append(Node(list2))
+
+        result = nested.flatten()
+        if result is not None and answer is not None:
+            print("input: " + str(args) + " | expected answer: " + str(answer) + " | result: " + str(
+                result.to_list()))
+            if result.to_list() == answer:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+        else:
+            print("result: " + str(result) + " and answer: " + str(answer))
+            if result == answer:
+                print("Test case passed!")
+            else:
+                print("Test with data:", args, "failed")
+        print(result)
+
+
+test_flatten()
+
+linked_list = LinkedList(head=Node(1))
+linked_list.append(Node(3))
+linked_list.append(Node(5))
+
+nested_linked_list = NestedLinkedList(Node(linked_list))
+
+second_linked_list = LinkedList(head=Node(2))
+second_linked_list.append(Node(4))
+
+nested_linked_list.append(Node(second_linked_list))
+
+solution = nested_linked_list.flatten()
+assert solution.to_list() == [1, 2, 3, 4, 5]
