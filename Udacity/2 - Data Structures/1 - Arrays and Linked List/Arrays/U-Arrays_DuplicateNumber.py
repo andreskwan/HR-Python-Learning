@@ -57,6 +57,9 @@ def duplicate_number(arr):
 #                   ([0, 1, 3, 3], 3),
 #                   ([0, 2, 3, 1, 4, 5, 3], 3),
 #                   ([0, 1, 5, 4, 3, 2, 0], 0)
+test_duplicate_number()
+
+
 def test_duplicate_number():
     test_cases = [([], None),
                   ([0], None),
@@ -89,6 +92,3 @@ def test_duplicate_number():
                 print("Test case passed!")
             else:
                 print("Test with data:", args, "failed")
-
-
-test_duplicate_number()
