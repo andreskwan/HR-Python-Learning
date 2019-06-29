@@ -126,7 +126,7 @@ class LinkedList(Node):
         return None
 
     def pop(self):
-        """ Return the first node's value and remove it from the list. """
+        """ Return the first node's value and remove_first_occurrence it from the list. """
         if self.head is None:
             return None
         actual_value = self.head.value
@@ -202,8 +202,8 @@ def swap_nodes(node_n, node_a, node_b):
 
 
 def test_swap_nodes():
-    #  input (), output ()
-    # ([], None),
+    print("--------------------------")
+    print("-------test_swap_nodes-------")
     test_cases = [
         ([1, 3, 2, 4], [1, 2, 3, 4])]
 
@@ -228,7 +228,7 @@ def test_swap_nodes():
                 print("Test with data:", args, "failed")
 
 
-# test_swap_nodes()
+test_swap_nodes()
 
 
 def swap_data(node_a, node_b):
@@ -246,8 +246,8 @@ def swap_data(node_a, node_b):
 
 
 def test_swap_data():
-    #  input (), output ()
-    # ([], None),
+    print("--------------------------")
+    print("-------test_swap_data-------")
     test_cases = [
         ([1, 3, 2, 4], [1, 2, 3, 4])]
 
@@ -289,6 +289,8 @@ def insert_node_after(actual_node, new_value):
 
 
 def test_insert_node_after():
+    print("--------------------------")
+    print("-------test_insert_node_after-------")
     #  input (), output ()
     # ([], None),
     test_cases = [
@@ -321,6 +323,8 @@ def test_insert_node_after():
 
 
 def test_pop():
+    print("--------------------------")
+    print("-------test_pop-------")
     test_cases = [([], (None, None)),
                   ([1], (1, None)),
                   ([1, 2], (1, [2])),
@@ -384,6 +388,8 @@ def sort(unsorted_list):
 
 
 def test_sort():
+    print("--------------------------")
+    print("-------test_sort-------")
     unsorted_list = [random.randint(1, 100000) for x in range(200)]
     sorted_list = sorted(unsorted_list)
     test_cases = [([], None),
@@ -445,6 +451,8 @@ def merge(list1, list2):
 
 
 def test_merge():
+    print("--------------------------")
+    print("-------test_merge-------")
     test_cases = [(([], []), None),
                   (([], [4, 7, 1, 0]), [0, 1, 4, 7]),
                   (([4, 7, 1, 0], []), [0, 1, 4, 7]),
@@ -490,6 +498,8 @@ class NestedLinkedList(LinkedList):
 
 
 def test_flatten():
+    print("--------------------------")
+    print("-------test_flatten-------")
     test_cases = [
                   (([1], [2]), [1, 2]),
                   (([1, 3, 5], [2, 4]), [1, 2, 3, 4, 5])]
@@ -498,7 +508,7 @@ def test_flatten():
     # (([5, 3, 1], [9, 4, 33]), [1, 3, 4, 5, 9, 33])]
 
     for (args, answer) in test_cases:
-        print("---------------------")
+        print("--------------------------")
         # for list in args:
         list1 = LinkedList(init_list=args[0])
         list2 = LinkedList(init_list=args[1])
@@ -522,7 +532,7 @@ def test_flatten():
         print(result)
 
 
-test_flatten()
+# test_flatten()
 
 linked_list = LinkedList(head=Node(1))
 linked_list.append(Node(3))

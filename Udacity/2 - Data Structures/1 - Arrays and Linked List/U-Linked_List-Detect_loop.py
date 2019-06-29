@@ -99,7 +99,7 @@ class LinkedList:
         return None
 
     def pop(self):
-        """ Return the first node's value and remove it from the list. """
+        """ Return the first node's value and remove_first_occurrence it from the list. """
         if self.head is None:
             return None
         actual_value = self.head.value

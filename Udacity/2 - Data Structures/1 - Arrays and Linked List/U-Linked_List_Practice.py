@@ -94,7 +94,7 @@ class LinkedList:
         return None
 
     def pop(self):
-        """ Return the first node's value and remove it from the list. """
+        """ Return the first node's value and remove_first_occurrence it from the list. """
         if self.head is None:
             return None
         actual_value = self.head.value
@@ -170,7 +170,7 @@ assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()
 assert linked_list.search(4).value == 4, f"list contents: {linked_list.to_list()}"
 # print(linked_list.to_list())
 
-# Test remove
+# Test remove_first_occurrence
 linked_list.remove(1)
 assert linked_list.to_list() == [2, 1, 3, 4, 3], f"list contents: {linked_list.to_list()}"
 assert linked_list.length == 5, f"list contents: {linked_list.to_list()}"
@@ -293,7 +293,7 @@ class LinkedListUdacity:
 
 
     def pop(self):
-        """ Return the first node's value and remove it from the list. """
+        """ Return the first node's value and remove_first_occurrence it from the list. """
         if self.head is None:
             return None
 
