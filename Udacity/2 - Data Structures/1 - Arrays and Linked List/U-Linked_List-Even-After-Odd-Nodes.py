@@ -225,3 +225,4 @@ def merge(list1, list2):
         return sort(list1)
     else:
         return sort(list2)
+

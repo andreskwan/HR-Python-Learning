@@ -26,7 +26,7 @@ def test_is_leap_year():
             if result == answer and answer != "AssertionError":
                 print("Test case passed!")
             else:
-                print("Test with data:", args, "failed")
+                print("Test with input data:", args, "failed")
 
         except AssertionError:
             if answer == "AssertionError":

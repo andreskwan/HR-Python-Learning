@@ -63,13 +63,13 @@ def test_nth_row_pascal():
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with data:", args, "failed")
+                print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " and answer: " + str(answer))
+            print("result: " + str(result) + " | expected answer: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with data:", args, "failed")
+                print("Test with input data:", args, "failed")
 
 
 test_nth_row_pascal()

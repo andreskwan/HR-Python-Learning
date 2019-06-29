@@ -31,7 +31,7 @@ def test_day_in_month():
             if result == answer and answer != "AssertionError":
                 print("Test case passed!")
             else:
-                print("Test with data:", args, "failed")
+                print("Test with input data:", args, "failed")
 
         except AssertionError:
             if answer == "AssertionError":
