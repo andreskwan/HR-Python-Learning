@@ -18,12 +18,11 @@ def sort(array: [int]) -> [int]:
         middle = array[0]
         heights = 0
 
-        if array[1] > array[2]:
-            lowest = array[2]
-            heights = array[1]
-        else:
-            lowest = array[1]
-            heights = array[2]
+        for value in array:
+            if value > middle:
+                heights = value
+            if value < middle:
+                lowest = value
 
         sorted_list.append(lowest)
         sorted_list.append(middle)
