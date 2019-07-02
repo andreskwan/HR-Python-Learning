@@ -4,29 +4,23 @@ import random
 def sort(array: [int]) -> [int]:
     sorted_list = []
     size = len(array)
-    if size == 1:
-        return sorted_list.append(array[0])
-    elif size == 2:
-        if array[0] > array[1]:
-            sorted_list.append(array[1])
-            sorted_list.append(array[0])
-        else:
-            sorted_list.append(array[0])
-            sorted_list.append(array[1])
-    elif size == 3:
-        lowest = 0
-        middle = array[0]
-        heights = 0
+    if size <= 1:
+        return array
 
-        for value in array:
-            if value > middle:
-                heights = value
-            if value < middle:
-                lowest = value
+    lowest = None
+    middle = array[0]
+    heights = None
 
-        sorted_list.append(lowest)
-        sorted_list.append(middle)
-        sorted_list.append(heights)
+    for value in array:
+        if value > middle:
+            heights = value
+        if value < middle:
+            lowest = value
+
+    if lowest is not None:  sorted_list.append(lowest)
+    sorted_list.append(middle)
+    if heights is not None:  sorted_list.append(heights)
+
     return sorted_list
 
 
@@ -52,10 +46,10 @@ def test_sort():
         # ([1, 2, 3], [1, 2, 3])]
         ([2, 1, 3], [1, 2, 3]),
         ([2, 3, 1], [1, 2, 3])]
-        # ([3, 1, 2], [1, 2, 3])]
-        # ([1, 3, 2], [1, 2, 3]),
-        # ([3, 2, 1], [1, 2, 3])]
-        # (unsorted_list, sorted_list)]
+    # ([3, 1, 2], [1, 2, 3])]
+    # ([1, 3, 2], [1, 2, 3]),
+    # ([3, 2, 1], [1, 2, 3])]
+    # (unsorted_list, sorted_list)]
 
     for (args, answer) in test_cases:
         print("---------------------")
