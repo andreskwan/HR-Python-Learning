@@ -1,6 +1,7 @@
 import random
 
 
+# TODO - fix sort sorted array recursion problem.
 def sort(array):
     sorted_list = []
     lower = []
@@ -54,16 +55,12 @@ def test_sort():
         if result is not None and answer is not None:
             print("input: " + str(unmodified) + " | expected answer: " + str(answer) + " | result: " + str(
                 result))
-            if result == answer:
-                print("Test case passed!")
-            else:
-                print("Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " | expected answer: " + str(answer))
-            if result == answer:
-                print("Test case passed!")
-            else:
-                print("Test with input data:", unmodified, "failed")
+        if result == answer:
+            print("Test case passed!")
+        else:
+            print("Test with input data:", unmodified, "failed")
 
 
 test_sort()
