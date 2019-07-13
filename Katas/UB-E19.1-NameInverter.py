@@ -9,6 +9,11 @@ def is_honorific(word):
     return re.search(r"^(Mr\.|Mrs\.)", word)
 
 
+def remove_honorifics(names):
+    if len(names) > 1 and is_honorific(names[0]):
+        names.pop(0)
+
+
 def get_post_nominals(param):
     postnominals = ""
     for x in param[2:]:
@@ -16,14 +21,12 @@ def get_post_nominals(param):
     return postnominals
 
 
-def formatted_name(names, postnominals):
+def formatted_name(names):
+    postnominals = ""
+    if len(names) > 2:
+        postnominals = get_post_nominals(names)
     reversed_named = "" + names[1] + ", " + names[0] + " " + postnominals
     return reversed_named.strip()
-
-
-def remove_honorifics(names):
-    if len(names) > 1 and is_honorific(names[0]):
-        names.pop(0)
 
 
 def name_inverter(name):
@@ -34,10 +37,7 @@ def name_inverter(name):
     if len(names) == 1:
         return names[0]
     else:
-        postnominals = ""
-        if len(names) > 2:
-            postnominals = get_post_nominals(names)
-        return formatted_name(names, postnominals)
+        return formatted_name(names)
 
 
 def test_name_inverter():
