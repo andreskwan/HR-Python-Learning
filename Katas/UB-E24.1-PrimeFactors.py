@@ -16,7 +16,8 @@ def test_prime_factors():
         (12, [2, 2, 3]),
         (13, [13]),
         (14, [2, 7]),
-        ((2 * 3 * 3 * 5 * 7 * 11 * 11 * 13), [2, 3, 3, 5, 7, 11, 11, 13])]
+        ((2 * 3 * 3 * 5 * 7 * 11 * 11 * 13), [2, 3, 3, 5, 7, 11, 11, 13])
+    ]
 
     for (args, answer) in test_cases:
         print("---------------------")
@@ -39,6 +40,8 @@ def test_prime_factors():
 
 def prime_factors(n):
     factors = []
+    if n == 1:
+        return factors
     divisor = 2
     while n > 1:
         while n % divisor == 0:
@@ -46,6 +49,5 @@ def prime_factors(n):
             n //= divisor
         divisor += 1
     return factors
-
 
 test_prime_factors()
