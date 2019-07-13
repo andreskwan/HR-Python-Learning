@@ -1,9 +1,13 @@
+import re
+
+
 def name_inverter(name):
     if name is None:
         return ""
-    # swap?
+    # TPP 11 assign
+    name = name.strip()
     # TPP 6 variable to array
-    names = name.split(" ")
+    names = re.split(r"\s+", name)
     if len(names) == 1:
         return name
     return "" + names[1] + ", " + names[0]
@@ -13,9 +17,13 @@ def test_name_inverter():
     print("--------------------------")
     print("-------test_prime_factors-------")
     test_cases = [
+        # degenerate cases first
         (None, ""),  # givenNull_returnEmptyString
         ("", ""),  # givenEmptyString_returnEmptyString
         ("Name", "Name"),  # givenOnlyName_returnOnlyName
+        ("  Name    ", "Name"),  # givenOnlyNameWithSpaces_returnOnlyNameWithoutSpaces
+        # specific cases
+        ("   First    Last   ", "Last, First"),  # givenFirstLastWithSpaces_returnLastFirst
         ("First Last", "Last, First"),  # givenFirstLast_returnLastFirst
 
     ]
