@@ -12,32 +12,37 @@ def is_honorific(word):
 def remove_honorifics(names):
     if len(names) > 1 and is_honorific(names[0]):
         names.pop(0)
+    return names
 
 
-def get_post_nominals(param):
-    postnominals = ""
-    for x in param[2:]:
-        postnominals += x + " "
-    return postnominals
-
-
-def formatted_name(names):
-    postnominals = ""
+def get_post_nominals(names):
+    post_nominals = ""
     if len(names) > 2:
-        postnominals = get_post_nominals(names)
-    reversed_named = "" + names[1] + ", " + names[0] + " " + postnominals
+        for x in names[2:]:
+            post_nominals += x + " "
+    return post_nominals
+
+
+def format_multi_element_name(names):
+    post_nominals = get_post_nominals(names)
+    last_name = names[1]
+    first_name = names[0]
+    reversed_named = "" + last_name + ", " + first_name + " " + post_nominals
     return reversed_named.strip()
+
+
+def format_name(names):
+    if len(names) == 1:
+        return names[0]
+    else:
+        return format_multi_element_name(names)
 
 
 def name_inverter(name):
     if name is None:
         return ""
-    names = split_name(name)
-    remove_honorifics(names)
-    if len(names) == 1:
-        return names[0]
     else:
-        return formatted_name(names)
+        return format_name(remove_honorifics(split_name(name)))
 
 
 def test_name_inverter():
