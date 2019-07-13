@@ -30,18 +30,18 @@ def test_name_inverter():
 
     args: str
     for (args, answer) in test_cases:
-        print("---------------------")
+        print("\n---------------------")
         result = name_inverter(args)
 
         if result is not None and answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(answer) + "\n -> result: " + str(
+            print("input: " + str(args) + "\nexpected: " + str(answer) + "\nresult: " + str(
                 result))
             if result == answer:
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
