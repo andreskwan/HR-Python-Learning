@@ -32,10 +32,10 @@ def test_sort():
         result = sort(args)
 
         if result is not None and answer is not None:
-            print("input: " + str(unmodified) + " | expected answer: " + str(answer) + " | result: " + str(
+            print("input:    " + str(unmodified) + "\nexpected: " + str(answer) + "\nresult:   " + str(
                 result))
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
         if result == answer:
             print("Test case passed!")
         else:

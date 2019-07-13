@@ -214,14 +214,14 @@ def test_swap_nodes():
 
         temporal_answer = LinkedList(init_list=answer)
         if result is not None and temporal_answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(temporal_answer.to_list()) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(temporal_answer.to_list()) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
@@ -258,14 +258,14 @@ def test_swap_data():
 
         temporal_answer = LinkedList(init_list=answer)
         if result is not None and temporal_answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(temporal_answer.to_list()) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(temporal_answer.to_list()) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
@@ -305,14 +305,14 @@ def test_insert_node_after():
 
         temporal_answer = LinkedList(init_list=answer)
         if result is not None and temporal_answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(temporal_answer.to_list()) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(temporal_answer.to_list()) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
@@ -340,13 +340,13 @@ def test_pop():
         temporal_answer = LinkedList(init_list=answer[1])
         if pop_value is not None and value_answer is not None:
             # print("temporal_list: "+str(temporal_list.to_list()) + " and temporal_answer: "+str(temporal_answer.to_list()))
-            print("pop_value: " + str(pop_value) + " | expected answer: " + str(answer[0]))
+            print("pop_value: " + str(pop_value) + "\nexpected: " + str(answer[0]))
             if temporal_answer.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("pop_value: " + str(pop_value) + " | expected answer: " + str(answer[0]))
+            print("pop_value: " + str(pop_value) + "\nexpected: " + str(answer[0]))
             if pop_value == answer[1]:
                 print("Test case passed!")
             else:
@@ -416,14 +416,14 @@ def test_sort():
         result = sort(temporal_list)
         temporal_answer = LinkedList(init_list=answer)
         if result is not None and temporal_answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(temporal_answer.to_list()) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(temporal_answer.to_list()) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
@@ -464,14 +464,14 @@ def test_merge():
         list2 = LinkedList(init_list=args[1])
         result = merge(list1, list2)
         if result is not None and answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(answer) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(answer) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == answer:
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
@@ -517,14 +517,14 @@ def test_flatten():
 
         result = nested.flatten()
         if result is not None and answer is not None:
-            print("input: " + str(args) + " | expected answer: " + str(answer) + " | result: " + str(
+            print("input:    " + str(args) + "\nexpected: " + str(answer) + "\nresult:   " + str(
                 result.to_list()))
             if result.to_list() == answer:
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " | expected answer: " + str(answer))
+            print("result: " + str(result) + "\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
