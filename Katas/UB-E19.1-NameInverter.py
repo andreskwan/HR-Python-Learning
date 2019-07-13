@@ -1,8 +1,19 @@
 import re
 
 
+def split_name(name):
+    return re.split(r"\s+", name.strip())
+
+
 def is_honorific(word):
-    return word == "Mr."
+    return re.search(r"^(Mr\.|Mrs\.)", word)
+
+
+def get_postNominals(param):
+    postnominals = ""
+    for x in param[2:]:
+        postnominals += x + " "
+    return postnominals
 
 
 def name_inverter(name):
@@ -14,11 +25,12 @@ def name_inverter(name):
         names.pop(0)
     if len(names) == 1:
         return names[0]
-    return "" + names[1] + ", " + names[0]
-
-
-def split_name(name):
-    return re.split(r"\s+", name.strip())
+    else:
+        postnominals = ""
+        if len(names) > 2:
+            postnominals = get_postNominals(names)
+        reversed_name = "" + names[1] + ", " + names[0] + " " + postnominals
+        return reversed_name.strip()
 
 
 def test_name_inverter():
@@ -34,8 +46,11 @@ def test_name_inverter():
         ("  Name    ", "Name"),  # givenOnlyNameWithSpaces_returnOnlyNameWithoutSpaces
         ("   First    Last   ", "Last, First"),  # givenFirstLastWithSpaces_returnLastFirst
         # -
-        ("First Last", "Last, First"),      # givenFirstLast_returnLastFirst
-        ("Mr. First Last", "Last, First"),  # ignoreHonorific
+        ("First Last", "Last, First"),  # givenFirstLast_returnLastFirst
+        ("Mr. First Last", "Last, First"),  # ignoreHonorifics
+        ("Mrs. First Last", "Last, First"),  # ignoreHonorific
+        ("First Last Sr.", "Last, First Sr."),  # postNominal_stayAtEnd
+        ("First Last Sr. BS. Phd.", "Last, First Sr. BS. Phd."),  # postNominal_stayAtEnd
 
     ]
 
@@ -45,14 +60,14 @@ def test_name_inverter():
         result = name_inverter(args)
 
         if result is not None and answer is not None:
-            print("input:    " + str(args) + "\nexpected: " + str(answer) + "\nresult:   " + str(
-                result))
+            print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(
+                result) + " |")
             if result == answer:
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + "\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
