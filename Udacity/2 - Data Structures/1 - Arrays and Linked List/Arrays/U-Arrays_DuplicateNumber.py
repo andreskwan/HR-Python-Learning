@@ -80,14 +80,14 @@ def test_duplicate_number():
         print("---------------------")
         result = duplicate_number(args)
         if result is not None and answer is not None:
-            print("input:    " + str(args) + "\nexpected: " + str(answer) + "\nresult:   " + str(
-                result))
+            print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(
+                result) + " |")
             if result == answer:
                 print("Test case passed!")
             else:
                 print("Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + "\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
