@@ -1,12 +1,20 @@
 import re
 
+# TODO
+#  1 - create a class
+#  2 - handle honorifics - as static regex constant
+#  3 - handle post-nominals as static regex constant
+#    - U. Bob do not use a list.
+
 
 def split_name(name):
     return re.split(r"\s+", name.strip())
 
 
 def is_honorific(word):
-    return re.search(r"^(Mr\.|Mrs\.)", word)
+    honorifics = r"^(Mr\.|Mrs\.|Ms\.)"  # this is a string!
+    # print(type(honorifics))
+    return re.search(honorifics, word)
 
 
 def remove_honorifics(names):
@@ -60,7 +68,8 @@ def test_name_inverter():
         # -
         ("First Last", "Last, First"),                              # givenFirstLast_returnLastFirst
         ("Mr. First Last", "Last, First"),                          # ignoreHonorifics
-        ("Mrs. First Last", "Last, First"),                         # ignoreHonorific
+        ("Mrs. First Last", "Last, First"),                         # ignoreHonorifics
+        ("Ms. First Last", "Last, First"),                         # ignoreHonorifics
         ("First Last Sr.", "Last, First Sr."),                      # postNominal_stayAtEnd
         ("First Last Sr. BS. Phd.", "Last, First Sr. BS. Phd."),    # postNominals_stayAtEnd
         ("     First      Last     Sr.    BS.    Phd.   ", "Last, First Sr. BS. Phd."),    # integration
@@ -78,13 +87,13 @@ def test_name_inverter():
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 test_name_inverter()
