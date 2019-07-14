@@ -72,7 +72,7 @@ def test_days_between_dates():
             if result == answer and answer != "AssertionError":
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
         except AssertionError:
             if answer == "AssertionError":

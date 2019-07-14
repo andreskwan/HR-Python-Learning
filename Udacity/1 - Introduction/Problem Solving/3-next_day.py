@@ -52,7 +52,7 @@ def test_next_day():
             if result == answer and answer != "AssertionError":
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
         except AssertionError:
             if answer == "AssertionError":

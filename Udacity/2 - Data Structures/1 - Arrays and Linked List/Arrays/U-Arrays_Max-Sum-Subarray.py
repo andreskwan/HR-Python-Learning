@@ -76,13 +76,13 @@ def test_max_sum_subarray():
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 test_max_sum_subarray()

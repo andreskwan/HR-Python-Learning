@@ -39,7 +39,7 @@ def test_sort():
         if result == answer:
             print("Test case passed!")
         else:
-            print("Test with input data:", unmodified, "failed")
+            print("**********************Test with input data:", unmodified, "failed")
 
 
 # TODO - fix sort sorted array recursion problem.

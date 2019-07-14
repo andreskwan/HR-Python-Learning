@@ -219,13 +219,13 @@ def test_swap_nodes():
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 test_swap_nodes()
@@ -263,13 +263,13 @@ def test_swap_data():
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 # test_swap_data()
@@ -310,13 +310,13 @@ def test_insert_node_after():
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 # test_insert_node_after()
@@ -344,13 +344,13 @@ def test_pop():
             if temporal_answer.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("pop_value: " + str(pop_value) + " |\nexpected: " + str(answer[0]))
             if pop_value == answer[1]:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 # test_pop()
@@ -421,13 +421,13 @@ def test_sort():
             if result.to_list() == temporal_answer.to_list():
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 # test_sort()
@@ -469,13 +469,13 @@ def test_merge():
             if result.to_list() == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
 
 
 # test_merge()
@@ -522,13 +522,13 @@ def test_flatten():
             if result.to_list() == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         else:
             print("result: " + str(result) + " |\nexpected: " + str(answer))
             if result == answer:
                 print("Test case passed!")
             else:
-                print("Test with input data:", args, "failed")
+                print("**********************Test with input data:", args, "failed")
         print(result)
 
 
