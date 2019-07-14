@@ -87,7 +87,7 @@ def test_duplicate_number():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:

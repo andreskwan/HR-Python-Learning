@@ -35,7 +35,7 @@ def test_sort():
             print("input:    " + str(unmodified) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(
                 result) + " |")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
         if result == answer:
             print("Test case passed!")
         else:

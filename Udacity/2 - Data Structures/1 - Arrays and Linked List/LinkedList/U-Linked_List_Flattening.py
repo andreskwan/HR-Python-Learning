@@ -221,7 +221,7 @@ def test_swap_nodes():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
@@ -265,7 +265,7 @@ def test_swap_data():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
@@ -312,7 +312,7 @@ def test_insert_node_after():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
@@ -423,7 +423,7 @@ def test_sort():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
@@ -471,7 +471,7 @@ def test_merge():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
@@ -524,7 +524,7 @@ def test_flatten():
             else:
                 print("**********************Test with input data:", args, "failed")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer))
+            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
             if result == answer:
                 print("Test case passed!")
             else:
