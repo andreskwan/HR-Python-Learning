@@ -5,19 +5,15 @@ def word_wrap(string, width):
         return string
     if len(string) <= width:
         return string
-    else:
-        # insert \n according to width
+    else:  # insert \n according to width
         n = 0
         s = ""
         while (width * (n + 1)) < len(string):
             part_of_string = string[width * n:width * (n + 1)]
-            if part_of_string == " ":
-                n += 1
-                part_of_string = string[width * n:width * (n + 1)]
-            else:
+            if part_of_string != " ":  # ignore space
                 s += part_of_string + "\n"
-                n += 1
-        s += part_of_string
+            n += 1
+        s += string[width * n:width * (n + 1)]
         return s
 
 
@@ -26,16 +22,16 @@ def test_word_wrap():
     print("-------test_prime_factors-------")
     test_cases = [
         # degenerate cases first
-        # ((None, None), ""),
-        # (("", None), ""),
-        # (("x", None), "x"),
-        # (("x", 1), "x"),
-        # (("xx", 1), "x\nx"),                # breaking a word longer than width
-        # (("xxx", 1), "x\nx\nx"),            # multiple lines - breaking a word longer than width
-        (("x x", 1), "x\nx"),               # avoiding spaces
-        # specific cases
-        # (("xxxxx", 1), "x\nx\nx\nx\nx"),    # multiple lines - breaking a word longer than width
-        # (("xxxxx", 2), "xx\nxx\nx"),  # multiple lines - breaking a word longer than width
+        ((None, None), ""),
+        (("", None), ""),
+        (("x", None), "x"),
+        (("x", 1), "x"),
+        (("xx", 1), "x\nx"),  # breaking a word longer than width
+        (("xxx", 1), "x\nx\nx"),  # multiple lines - breaking a word longer than width
+        (("x x", 1), "x\nx"),  # avoiding spaces
+        # # specific cases
+        (("xxxxx", 1), "x\nx\nx\nx\nx"),  # multiple lines - breaking a word longer than width
+        (("xxxxx", 2), "xx\nxx\nx"),  # multiple lines - breaking a word longer than width
         # integration test
 
     ]
