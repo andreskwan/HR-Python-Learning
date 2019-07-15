@@ -16,8 +16,10 @@ def word_wrap(string, width):
                 string = string[breakpoint:].strip()  # reduce length of the string
                 n = 0  # start from zero
             else:
-                upper_bound = width * (n + 1)
                 n += 1
+                upper_bound = width * (n + 1)
+            if width == 1:
+                upper_bound + 1
             part_of_string = string[width * n:upper_bound]
             if part_of_string != " ":  # ignore space
                 s += part_of_string + "\n"
@@ -38,10 +40,10 @@ def test_word_wrap():
         (("xxx", 1), "x\nx\nx"),  # multiple lines - breaking a word longer than width
         (("x x", 1), "x\nx"),  # avoiding spaces
         (("x xx", 3), "x\nxx"),  # width includes the first part of another word following a space
-        #                             # - find the last space and break there
+                                    # - find the last space and break there
         # specific cases
-        # (("xxxxx", 1), "x\nx\nx\nx\nx"),  # multiple lines - breaking a word longer than width
-        # (("xxxxx", 2), "xx\nxx\nx"),  # multiple lines - breaking a word longer than width
+        (("xxxxx", 1), "x\nx\nx\nx\nx"),  # multiple lines - breaking a word longer than width
+        (("xxxxx", 2), "xx\nxx\nx"),  # multiple lines - breaking a word longer than width
         # integration test
 
     ]
