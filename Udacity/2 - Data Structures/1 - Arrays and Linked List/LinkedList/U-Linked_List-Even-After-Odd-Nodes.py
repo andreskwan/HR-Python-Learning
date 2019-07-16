@@ -1,228 +1,122 @@
-
-import random
-
-
 class Node:
-    def __init__(self, value):
-        # if value is None:
-        #     return None
-        self.value = value
+    def __init__(self, data):
+        self.data = data
         self.next = None
 
 
-class LinkedList(Node):
-    def __init__(self, head: Node = None, init_list=None):
-        self.head = head
-        self.tail = self.head
-        self.length = 0
-
-        if init_list:
-            for value in init_list:
-                self.append_value(value)
-
-    def __iter__(self):
-        node = self.head
-        while node:
-            yield node.value
-            node = node.next
-
-    def __repr__(self):
-        return str([v for v in self])
-
-    def prepend(self, value):
-        """ Prepend a value to the beginning of the list. """
-        self.length += 1
-        if self.head:
-            temporal = self.head
-            self.head = Node(value)
-            self.head.next = temporal
-            return
-        self.head = Node(value)
-        self.tail = self.head
-
-    def append_value(self, value):
-        """ Append a value to the end of the list. """
-        self.length += 1
-        new_node = Node(value)
-        # print("id(node):" + str(id(new_node)) + " - node.value: " + str(new_node.value))
-        if self.head is None:
-            self.head = new_node
-            self.tail = self.head
-            return
-        if self.tail:
-            self.tail.next = new_node
-            self.tail = self.tail.next
-
-    def append(self, node: Node):
-        """ Append a value to the end of the list. """
-        self.length += 1
-        # print("id(node):" + str(id(node)) + " - node.value: " + str(node.value))
-        if self.head is None:
-            self.head = node
-            self.tail = self.head
-            return
-        if self.tail:
-            self.tail.next = node
-            self.tail = self.tail.next
-
-    def search(self, value):
-        """ Search the linked list for a node with the requested value and return the node. """
-        current_node = self.head
-        while current_node:  #
-            if current_node.value == value:
-                return current_node
-            current_node = current_node.next  # update current_node
+# helper functions for testing purpose
+def create_linked_list(arr):
+    if len(arr) == 0:
         return None
-
-    def remove_first_occurrence(self, value):
-        if value == self.head.value and self.size() == 1:
-            self.length = 0
-            self.head = None
-            self.tail = None
-            return
-        current_node = self.head
-        while current_node:  #
-            if current_node.value == value:
-                new_head = current_node.next
-                self.head = new_head
-                self.length -= 1
-                return
-            if current_node.next.value == value:
-                self.length -= 1
-                temporal = current_node.next.next  # preserve the rest of the list
-                current_node.next = temporal
-                if current_node.next is None:
-                    self.tail = current_node
-                return
-            current_node = current_node.next
-        return None
-
-    def pop(self):
-        """ Return the first node's value and remove_first_occurrence it from the list. """
-        if self.head is None:
-            return None
-        actual_value = self.head.value
-        self.remove_first_occurrence(actual_value)
-        return actual_value
-
-    def insert(self, value, pos):
-        """ Insert value at pos position in the list. If pos is larger than the
-            length of the list, append to the end of the list. """
-        if pos == 0:
-            self.prepend(value)
-            return
-        if self.size() < pos:
-            self.append_value(value)
-            return
-        current_node = self.head
-        position = 1
-        while current_node.next:
-            if position == pos:
-                temporal = current_node.next
-                new_node = Node(value)
-                new_node.next = temporal
-                current_node.next = new_node
-                self.length += 1
-                return
-            position += 1
-            current_node = current_node.next
-
-    def size(self):
-        """ Return the size or length of the linked list. """
-        current = self.head
-        count = 0
-        # TODO: fix self.length, it should be updated to avoid O(n) and return to O(1)
-        while current:
-            count += 1
-            current = current.next
-        self.length = count
-        return self.length
-
-    def to_list(self):
-        out = []
-        node = self.head
-        while node:
-            out.append(node.value)
-            node = node.next
-        return out
-
-    def is_circular(self):
-        fast = self.head
-        slow = self.head
-
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-            if fast == slow:
-                return True
-        return False
+    head = Node(arr[0])
+    tail = head
+    for data in arr[1:]:
+        tail.next = Node(data)
+        tail = tail.next
+    return head
 
 
-def swap_nodes(node_n, node_a, node_b):
-    if node_n is None or node_a is None or node_b is None:
-        return None
-    node_n.next = node_b
-    node_a.next = node_b.next
-    node_b.next = node_a
+def print_linked_list(head):
+    while head:
+        print(head.data, end=' ')
+        head = head.next
+    print()
 
 
-def swap_data(node_a, node_b):
-    if node_a is None or node_b is None:
-        return None
-    temp = node_a.value
-    node_a.value = node_b.value
-    node_b.value = temp
+def to_list(head):
+    out = []
+    node = head
+    while node:
+        out.append(node.data)
+        node = node.next
+    return out
 
 
-def insert_node_after(actual_node, new_value):
-    temp = actual_node.next
-    second_node = Node(new_value)
-    second_node.next = temp
-    actual_node.next = second_node
+# Solution
+def even_after_odd(current_node):
+    if current_node is None:
+        return create_linked_list([])
 
+    even = None
+    odd = None
+    even_tail = None
+    head_tail = None
 
-def sort(unsorted_list):
-    if 0 == unsorted_list.length:
-        return None
-    if 1 == unsorted_list.length:
-        return unsorted_list
-    first = unsorted_list.pop()
-    # second = unsorted_list.pop()
-    sorted_list = LinkedList(Node(first))
+    while current_node:
+        next_node = current_node.next
 
-    while unsorted_list.length > 0:  # if there is more to sort
-        current = sorted_list.head
-        value = unsorted_list.pop()  # get head from unsorted
-        previous = current
-        if value < current.value:
-            sorted_list.prepend(value)
-            continue
-        while current.value < value and current.next is not None:
-            previous = current
-            current = current.next
-        if previous.next is None:
-            sorted_list.append_value(value)
-        else:
-            if current.value < value and current.next is None:
-                sorted_list.append_value(value)
+        if current_node.data % 2 == 0:
+            if even is None:
+                even = current_node
+                even_tail = even
             else:
-                insert_node_after(previous, value)
-    return sorted_list
+                even_tail.next = current_node
+                even_tail = even_tail.next
+        else:
+            if odd is None:
+                odd = current_node
+                odd_tail = odd
+            else:
+                odd_tail.next = current_node
+                odd_tail = odd_tail.next
+        current_node.next = None
+        current_node = next_node
+
+    if odd is None:
+        return even
+    odd_tail.next = even
+    return odd
 
 
-def merge(list1, list2):
-    if list1 is None and list2 is None:
-        return None
-    if list1 is None:
-        return sort(list2)
-    if list2 is None:
-        return sort(list1)
-    if list1.length == 0 and list2.length == 0:
-        return None
-    if list1.length is not 0:
-        list1.tail.next = list2.head
-        list1.tail = list2.tail
-        return sort(list1)
-    else:
-        return sort(list2)
+# return list/head not an array
+# def even_after_odd(head):
+#     return None
 
+
+def test_even_after_odd():
+    print("--------------------------")
+    print("-------test_even_after_od-------")
+    test_cases = [
+        # degenerate cases first
+        # (None, []),
+        # ([], []),
+        ([1], [1]),
+        ([1, 3], [1, 3]),           # only odds
+        ([2, 4], [2, 4]),           # only even
+        ([1, 2], [1, 2]),           # even after odd
+        ([2, 1], [1, 2]),           # even before odd
+        ([4, 1, 3], [1, 3, 4]),     # even at the beginning
+        ([4, 2, 3], [3, 4, 2]),     # odd at the end
+        ([4, 1, 2], [1, 4, 2]),     # odd between even
+        ([1, 2, 3], [1, 3, 2]),     # even between odd
+        ([1, 3, 5, 7], [1, 3, 5, 7]),
+        ([2, 4, 6, 8], [2, 4, 6, 8]),
+        ([1, 2, 3, 4, 5, 6], [1, 3, 5, 2, 4, 6]),
+
+        # specific cases
+
+        # integration test
+    ]
+
+    for (args, answer) in test_cases:
+        print("\n---------------------")
+        # linkedList = LinkedList(init_list=args)
+        list_head = create_linked_list(args)
+        result_list = to_list(even_after_odd(list_head))
+
+        if result_list is not None and answer is not None:
+            print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   "
+                  + str(result_list) + " |")
+            if result_list == answer:
+                print("Test case passed!")
+            else:
+                print("**********************Test with input data:", args, "failed")
+        else:
+            print("result: " + str(result_list) + " |\nexpected: " + str(answer) + "|")
+            if result_list == answer:
+                print("Test case passed!")
+            else:
+                print("**********************Test with input data:", args, "failed")
+
+
+test_even_after_odd()
