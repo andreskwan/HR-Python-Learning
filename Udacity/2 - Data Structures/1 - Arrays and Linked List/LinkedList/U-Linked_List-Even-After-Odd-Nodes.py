@@ -46,9 +46,10 @@ def even_after_odd(head):
     odd_tail = None
     even_tail = None
 
-    if current_node is not None:
+    while current_node is not None:
         node_next = current_node.next
         current_node.next = None
+
         if current_node.data % 2 == 0:
             if even is None:
                 even = current_node
@@ -63,21 +64,8 @@ def even_after_odd(head):
             else:
                 odd_tail.next = current_node
                 odd_tail = current_node
-    if node_next is not None:
-        if node_next.data % 2 == 0:
-            if even is None:
-                even = node_next
-                even_tail = node_next
-            else:
-                even_tail.next = node_next
-                even_tail = node_next
-        else:
-            if odd is None:
-                odd = node_next
-                odd_tail = node_next
-            else:
-                odd_tail.next = node_next
-                odd_tail = node_next
+        current_node = node_next
+
     if odd_tail is not None:
         odd_tail.next = even
     # if even_tail is not None:
