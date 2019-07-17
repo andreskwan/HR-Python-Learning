@@ -93,13 +93,15 @@ def test_even_after_odd():
         ([1, 2], [1, 2]),           # even after odd
         ([2, 1], [1, 2]),           # even before odd
 
-        # ([4, 1, 3], [1, 3, 4]),     # even at the beginning
-        # ([4, 2, 3], [3, 4, 2]),     # odd at the end
-        # ([4, 1, 2], [1, 4, 2]),     # odd between even
-        # ([1, 2, 3], [1, 3, 2]),     # even between odd
-        # ([1, 3, 5, 7], [1, 3, 5, 7]),
-        # ([2, 4, 6, 8], [2, 4, 6, 8]),
-        # ([1, 2, 3, 4, 5, 6], [1, 3, 5, 2, 4, 6]),
+        ([4, 1, 3], [1, 3, 4]),     # even at the beginning
+        ([4, 2, 3], [3, 4, 2]),     # odd at the end
+        ([4, 1, 2], [1, 4, 2]),     # odd between even
+
+        ([1, 2, 3], [1, 3, 2]),     # even between odd
+        # Udacity cases
+        ([1, 3, 5, 7], [1, 3, 5, 7]),
+        ([2, 4, 6, 8], [2, 4, 6, 8]),
+        ([1, 2, 3, 4, 5, 6], [1, 3, 5, 2, 4, 6]),
 
         # specific cases
 
