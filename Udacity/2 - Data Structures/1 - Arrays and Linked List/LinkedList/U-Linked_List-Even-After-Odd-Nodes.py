@@ -66,12 +66,9 @@ def even_after_odd(head):
                 odd_tail = current_node
         current_node = node_next
 
-    if odd_tail is not None:
-        odd_tail.next = even
-    # if even_tail is not None:
-    #     even_tail.next = even
     if odd is None:
         return even
+    odd_tail.next = even
     return odd
 
 
