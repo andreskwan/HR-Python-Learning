@@ -51,50 +51,39 @@ def skip_i_delete_j(list_head, i, j):
         return []
     if i is None:
         return list_head
-    if j is None:
+    if i is 0:
         return list_head
     if i > size(list_head):
+        return list_head
+    if j is None:
         return list_head
     if j is 0:
         return list_head
 
-    if i == 0:  # remove head
-        list_head = list_head.next
-        return list_head
-    if i == 1:
-        if list_head.next is not None:
-            list_head.next = list_head.next.next
-        return list_head
-    # if i == 2:
-    #     list_head.next.next = None
-    #     return list_head
-    # if i == 3:
-    #     list_head.next.next.next = None
-    #     return list_head
-    counter = 0
-    current = list_head
-    while counter < i-1:
-        counter += 1
-        current = current.next
-    current.next = None
+    available = size(list_head) - i
+    i_counter = 1
+    i_current = list_head
+
+    while i_counter < i:     # find i-1 node // start to delete from node i
+        i_current = i_current.next
+        i_counter += 1
+
+    j_head = i_current.next  # preserve nodes after i_current
+    i_current.next = None    # keep nodes from list_heat up to i_current
+
+    j_counter = 0
+    j_current = j_head       # it is copied or referenced? Reference
+    new_j = j if j <= available else available
+
+    while j_counter < new_j:
+        j_counter += 1
+        if j_current.next is not None:
+            j_current = j_current.next
+        else:
+            j_current = None
+
+    i_current.next = skip_i_delete_j(j_current, i, j)
     return list_head
-
-    # list_head.next = None
-    # # count_i nodes up to i
-    # current_i = list_head
-    # count_i = 1
-    # while count_i < i:  # identify first i nodes
-    #     current_i = current_i.next
-    #     count_i += 1
-    # # j_tail and j_tail
-    #
-    # j_tail = current_i.next
-    # count_j = 1
-
-    # while count_j < j:
-    #     count_j += 1
-    #     j_tail = j_tail.next
-    # current_i.next = j_tail.next
 
 
 def test_skip_i_delete_j():
@@ -107,10 +96,12 @@ def test_skip_i_delete_j():
         (([1], None, None), [1]),
         (([1], 1, None), [1]),
         (([], None, 1), []),
+        (([], 0, 1), []),                             # if empty list return original list
         (([], 1, 1), []),                             # if empty list return original list
         (([1, 2], 1, 0), [1, 2]),                     # if j is 0 return original list
-        # # specific cases
-        (([1, 2], 0, 1), [2]),                        # i can be 0, delete from the first node.
+
+        # specific cases
+        (([1, 2], 0, 1), [1, 2]),                        # i can not be 0 - return original list
         (([1, 2], 1, 1), [1]),                        # if i and j are equal - is valid
         (([1, 2], 1, 2), [1]),                        # j can be greater than (length - i) return what is left
         (([1, 2], 1, 3), [1]),                        # j can be greater than (length - i) return what is left
@@ -118,14 +109,20 @@ def test_skip_i_delete_j():
         (([1, 2], 3, 1), [1, 2]),                     # if i greater than length of the list - return original list
         (([1, 2, 3], 1, 1), [1, 3]),                  # if i and j are equal - is valid
         (([1, 2, 3], 2, 1), [1, 2]),                  # i greater than j - is valid
-        # missing cases to evaluate | j << (len(list) - i)
-        (([1, 2, 3, 4], 3, 1), [1, 2, 3]),                  # i greater than j - is valid
-        #
-        #
+        # evaluate | j << (len(list) - i)
+        (([1, 2, 3, 4], 1, 1), [1, 3]),               # i greater than j - is valid
+        (([1, 2, 3, 4], 3, 1), [1, 2, 3]),            # i greater than j - is valid
+        (([1, 2, 3, 4, 5], 1, 1), [1, 3, 5]),
+        (([1, 2, 3, 4, 5], 1, 2), [1, 4]),
+        (([1, 2, 3, 4, 5], 1, 3), [1, 5]),
+        (([1, 2, 3, 4, 5], 1, 4), [1]),
+        (([1, 2, 3, 4, 5], 2, 1), [1, 2, 4, 5]),
+        (([1, 2, 3, 4, 5], 2, 2), [1, 2, 5]),
+        (([1, 2, 3, 4, 5], 2, 3), [1, 2]),
+        (([1, 2, 3, 4, 5], 2, 4), [1, 2]),
         # Udacity cases
-        # (([1, 2, 3, 4, 5], 2, 4), [1, 2])
-        # (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 2), [1, 2, 5, 6, 9, 10]),
-        # (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 3), [1, 2, 6, 7, 11, 12]),
+        (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 2), [1, 2, 5, 6, 9, 10]),
+        (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 3), [1, 2, 6, 7, 11, 12]),
 
         # integration test
 
