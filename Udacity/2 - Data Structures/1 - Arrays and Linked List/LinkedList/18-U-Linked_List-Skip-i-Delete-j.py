@@ -101,7 +101,7 @@ def test_skip_i_delete_j():
         (([1, 2], 1, 0), [1, 2]),                     # if j is 0 return original list
 
         # specific cases
-        (([1, 2], 0, 1), [1, 2]),                        # i can not be 0 - return original list
+        (([1, 2], 0, 1), [1, 2]),                     # i can not be 0 - return original list
         (([1, 2], 1, 1), [1]),                        # if i and j are equal - is valid
         (([1, 2], 1, 2), [1]),                        # j can be greater than (length - i) return what is left
         (([1, 2], 1, 3), [1]),                        # j can be greater than (length - i) return what is left
@@ -109,6 +109,7 @@ def test_skip_i_delete_j():
         (([1, 2], 3, 1), [1, 2]),                     # if i greater than length of the list - return original list
         (([1, 2, 3], 1, 1), [1, 3]),                  # if i and j are equal - is valid
         (([1, 2, 3], 2, 1), [1, 2]),                  # i greater than j - is valid
+
         # evaluate | j << (len(list) - i)
         (([1, 2, 3, 4], 1, 1), [1, 3]),               # i greater than j - is valid
         (([1, 2, 3, 4], 3, 1), [1, 2, 3]),            # i greater than j - is valid
@@ -120,6 +121,7 @@ def test_skip_i_delete_j():
         (([1, 2, 3, 4, 5], 2, 2), [1, 2, 5]),
         (([1, 2, 3, 4, 5], 2, 3), [1, 2]),
         (([1, 2, 3, 4, 5], 2, 4), [1, 2]),
+
         # Udacity cases
         (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 2), [1, 2, 5, 6, 9, 10]),
         (([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2, 3), [1, 2, 6, 7, 11, 12]),

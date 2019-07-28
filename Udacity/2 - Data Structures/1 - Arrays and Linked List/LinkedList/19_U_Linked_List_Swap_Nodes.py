@@ -49,7 +49,20 @@ def swap_nodes(head, left_index, right_index):
     TODO: complete this function and swap nodes present at left_index and right_index
     Do not create a new linked list
     """
-    return None
+    if head is None:
+        return []
+
+    if left_index == right_index:
+        return head
+
+    if size(head) == 2:
+        first_node = head.next  # 2->N
+        second_node = head  # 1 -> 2 -> N
+        second_node.next = None  # 1 -> N
+        first_node.next = second_node  # 2->1->N
+        return first_node
+
+    return head
 
 
 def test_swap_nodes():
@@ -59,14 +72,15 @@ def test_swap_nodes():
     test_cases = [
         # degenerate cases first
         ((None, None, None), []),
-        # (([1], None, None), [1]),
-        # (([1], 1, None), [1]),
-        # (([], None, 1), []),
-        # (([], 0, 1), []),  # if empty list return original list
-        # (([], 1, 1), []),  # if empty list return original list
-        # (([1, 2], 1, 0), [1, 2]),  # if right_index is 0 return original list
+        (([1], None, None), [1]),
+        (([1], 1, None), [1]),
+        (([], None, 1), []),
+        (([], 0, 1), []),  # if empty list return original list
+        (([3, 4], 1, 1), [3, 4]),  # if i == j return original list
 
         # specific cases
+        (([1, 2], 0, 1), [2, 1]),
+        # (([1, 2], 1, 0), [1, 2]),  # if right_index is 0 return original list
 
         # Udacity cases
 
