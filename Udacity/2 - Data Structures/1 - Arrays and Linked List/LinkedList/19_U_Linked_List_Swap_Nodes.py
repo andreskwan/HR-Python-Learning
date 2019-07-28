@@ -54,7 +54,6 @@ def swap_nodes(head, left_index, right_index):
     # to understand where should go each node when assembled
     left_list = None
     right_list = None
-    right_node_tail = None
 
     if head is None:
         return []
@@ -78,7 +77,7 @@ def swap_nodes(head, left_index, right_index):
 
     if size(head) >= 2:
         right_list = get_list_right_node(head, left_index)
-        left_list = get_list_left_node(left_list, right_list)
+        left_list = get_list_left_node(right_list)
 
         if left_index == 0:
             head = left_list
@@ -108,10 +107,10 @@ def get_list_right_node(head, left_index):
     return right_node
 
 
-def get_list_left_node(left_node, right_node):
+def get_list_left_node(right_node):
     right_node_tail = right_node.next  # 2->3->N
     right_node.next = None  # 1->N
-    # 2) find left_node
+    # 2) find left_node - needs right_index
     left_node = right_node_tail  # 2->3->N
     # 3) preserve left_node_tail
     left_node_tail = left_node.next  # 3->N
@@ -145,12 +144,14 @@ def test_swap_nodes():
         (([1, 2, 3], 1, 2), [1, 3, 2]),
         (([1, 2, 3], 2, 1), [1, 3, 2]),
 
+        # get_previous_right
         (([1, 2, 3, 4], 0, 1), [2, 1, 3, 4]),
         (([1, 2, 3, 4], 1, 0), [2, 1, 3, 4]),
         (([1, 2, 3, 4], 1, 2), [1, 3, 2, 4]),
         (([1, 2, 3, 4], 2, 1), [1, 3, 2, 4]),
         (([1, 2, 3, 4], 2, 3), [1, 2, 4, 3]),
         (([1, 2, 3, 4], 3, 2), [1, 2, 4, 3]),
+        # right_index
         # (([1, 2, 3], 0, 2), [3, 2, 1]),
         # (([1, 2, 3], 2, 0), [3, 2, 1]),
 
