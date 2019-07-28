@@ -88,10 +88,20 @@ def swap_nodes(head, left_index, right_index):
         left_node.next = right_node  # 2->1->N
         return left_node
 
-
-    # if size(head) == 3:
-        # 1) find left_node
-
+    if size(head) == 3:
+        # 1) find right_node
+        right_node = head
+        right_node_tail = head.next  # 2->3->N
+        right_node.next = None  # 1->N
+        # 2) find left_node
+        left_node = right_node_tail  # 2->3->N
+        # 3) preserve left_node_tail
+        left_node_tail = left_node.next  # 3->N
+        left_node.next = None  # 2->N
+        # 4) assemble list
+        right_node.next = left_node_tail  # 1->3->N
+        left_node.next = right_node  # 2->1->3->N
+        return left_node
 
     return head
 
@@ -113,10 +123,12 @@ def test_swap_nodes():
         # specific cases
         (([1, 2], 0, 1), [2, 1]),
         (([1, 2], 1, 0), [2, 1]),  # if right_index is 0 return original list
-        # (([1, 2, 3], 0, 1), [2, 1, 3]),
-        # (([1, 2, 3], 0, 2), [3, 2, 1]),
-        # (([1, 2, 3], 1, 0), [2, 1, 3]),
+        (([1, 2, 3], 0, 1), [2, 1, 3]),
+        (([1, 2, 3], 1, 0), [2, 1, 3]),
         # (([1, 2, 3], 1, 2), [2, 1, 3]),
+        # (([1, 2, 3], 2, 1), [2, 1, 3]),
+        # (([1, 2, 3], 0, 2), [3, 2, 1]),
+        # (([1, 2, 3], 2, 0), [3, 2, 1]),
 
         # Udacity cases
 
