@@ -76,19 +76,7 @@ def swap_nodes(head, left_index, right_index):
     # no asumir - no poner mi mente en el algoritmo
     # usar todos los parametros
 
-    if size(head) == 2:
-        # 1) find right_node
-        right_node = head  # 1->2->N
-        right_node_tail = head.next  # 2->N
-        right_node.next = None  # 1->N
-        # 2) find left_node
-        # left_node = head.next  # 2->N
-        left_node = right_node_tail
-        # 3) assemble list
-        left_node.next = right_node  # 2->1->N
-        return left_node
-
-    if size(head) == 3:
+    if size(head) >= 2:
         # 1) find right_node
         right_node = head
         right_node_tail = head.next  # 2->3->N
