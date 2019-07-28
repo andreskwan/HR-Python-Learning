@@ -52,8 +52,8 @@ def swap_nodes(head, left_index, right_index):
     # I'm giving and order
     # why?
     # to understand where should go each node when assembled
-    left_node = None
-    right_node = None
+    left_list = None
+    right_list = None
     right_node_tail = None
 
     if head is None:
@@ -77,65 +77,49 @@ def swap_nodes(head, left_index, right_index):
     # usar todos los parametros
 
     if size(head) >= 2:
+        right_list = get_list_right_node(head, left_index)
+        left_list = get_list_left_node(left_list, right_list)
+
         if left_index == 0:
-
-            # 1) find right_node
-            right_node = head
-
-            right_node_tail = right_node.next  # 2->3->N
-            right_node.next = None  # 1->N
-            # 2) find left_node
-            left_node = right_node_tail  # 2->3->N
-            # 3) preserve left_node_tail
-            left_node_tail = left_node.next  # 3->N
-            left_node.next = None  # 2->N
-            # 4) assemble list
-            right_node.next = left_node_tail  # 1->3->N
-            left_node.next = right_node  # 2->1->3->N
-
-            return left_node
-        if left_index == 1:
-            # 0) preserve head
-
-            # 1) find right_node
-            right_node = head.next  # 2->3->N
-
-            right_node_tail = right_node.next  # 3->N
-            right_node.next = None  # 2->N
-            # 2) find left_node
-            left_node = right_node_tail  # 3->N
-            # 3) preserve left_node_tail
-            left_node_tail = left_node.next  # 3->N
-            left_node.next = None  # 2->N
-            # 4) assemble list
-            right_node.next = left_node_tail  # 1->3->N
-            left_node.next = right_node  # 3->2->N
-
-            # head state 1->2->N
-            head.next = None
-            head.next = left_node  # 1->3->2->N
+            head = left_list
             return head
-        if left_index == 2:
-            # head 1->2->3->4->N
 
-            # 1) find right_node
-            right_node = head.next.next # 3->4->N
-            right_node_tail = right_node.next  # 4->N
-            right_node.next = None  # 3->N
-            # 2) find left_node
-            left_node = right_node_tail  # 4->N
-            # 3) preserve left_node_tail
-            left_node_tail = left_node.next  # N
-            left_node.next = None  # 4->N
-            # 4) assemble list
-            right_node.next = left_node_tail  # 3->N
-            left_node.next = right_node  # 4->3->N
-
-            # head state 1->2->3->N
-            head.next.next = None
-            head.next.next = left_node  # 1->3->2->N
-            return head
+        previous_right = get_previous_right(head, left_index)
+        previous_right.next = left_list
+        return head
     return head
+
+
+def get_previous_right(head, left_index):
+    counter = 0
+    previous_right = head
+    while counter < left_index - 1:
+        counter += 1
+        previous_right = previous_right.next
+    return previous_right
+
+
+def get_list_right_node(head, left_index):
+    counter = 0
+    right_node = head
+    while counter < left_index:  # find right node
+        counter += 1
+        right_node = right_node.next
+    return right_node
+
+
+def get_list_left_node(left_node, right_node):
+    right_node_tail = right_node.next  # 2->3->N
+    right_node.next = None  # 1->N
+    # 2) find left_node
+    left_node = right_node_tail  # 2->3->N
+    # 3) preserve left_node_tail
+    left_node_tail = left_node.next  # 3->N
+    left_node.next = None  # 2->N
+    # 4) assemble list
+    right_node.next = left_node_tail  # 1->3->N
+    left_node.next = right_node  # 2->1->3->N
+    return left_node
 
 
 def test_swap_nodes():
