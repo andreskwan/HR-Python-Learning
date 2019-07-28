@@ -54,6 +54,7 @@ def swap_nodes(head, left_index, right_index):
     # to understand where should go each node when assembled
     left_node = None
     right_node = None
+    right_node_tail = None
 
     if head is None:
         return []
@@ -67,30 +68,73 @@ def swap_nodes(head, left_index, right_index):
     if left_index == right_index:
         return head
 
-    #
-    # if left_index >= right_index:
-    #     temp = left_index
-    #     left_index = right_index
-    #     right_index = temp
+    if left_index >= right_index:
+        temp = left_index
+        left_index = right_index
+        right_index = temp
 
     # no asumir - no poner mi mente en el algoritmo
     # usar todos los parametros
 
     if size(head) >= 2:
-        # 1) find right_node
-        right_node = head
-        right_node_tail = head.next  # 2->3->N
-        right_node.next = None  # 1->N
-        # 2) find left_node
-        left_node = right_node_tail  # 2->3->N
-        # 3) preserve left_node_tail
-        left_node_tail = left_node.next  # 3->N
-        left_node.next = None  # 2->N
-        # 4) assemble list
-        right_node.next = left_node_tail  # 1->3->N
-        left_node.next = right_node  # 2->1->3->N
-        return left_node
+        if left_index == 0:
 
+            # 1) find right_node
+            right_node = head
+
+            right_node_tail = right_node.next  # 2->3->N
+            right_node.next = None  # 1->N
+            # 2) find left_node
+            left_node = right_node_tail  # 2->3->N
+            # 3) preserve left_node_tail
+            left_node_tail = left_node.next  # 3->N
+            left_node.next = None  # 2->N
+            # 4) assemble list
+            right_node.next = left_node_tail  # 1->3->N
+            left_node.next = right_node  # 2->1->3->N
+
+            return left_node
+        if left_index == 1:
+            # 0) preserve head
+
+            # 1) find right_node
+            right_node = head.next  # 2->3->N
+
+            right_node_tail = right_node.next  # 3->N
+            right_node.next = None  # 2->N
+            # 2) find left_node
+            left_node = right_node_tail  # 3->N
+            # 3) preserve left_node_tail
+            left_node_tail = left_node.next  # 3->N
+            left_node.next = None  # 2->N
+            # 4) assemble list
+            right_node.next = left_node_tail  # 1->3->N
+            left_node.next = right_node  # 3->2->N
+
+            # head state 1->2->N
+            head.next = None
+            head.next = left_node  # 1->3->2->N
+            return head
+        if left_index == 2:
+            # head 1->2->3->4->N
+
+            # 1) find right_node
+            right_node = head.next.next # 3->4->N
+            right_node_tail = right_node.next  # 4->N
+            right_node.next = None  # 3->N
+            # 2) find left_node
+            left_node = right_node_tail  # 4->N
+            # 3) preserve left_node_tail
+            left_node_tail = left_node.next  # N
+            left_node.next = None  # 4->N
+            # 4) assemble list
+            right_node.next = left_node_tail  # 3->N
+            left_node.next = right_node  # 4->3->N
+
+            # head state 1->2->3->N
+            head.next.next = None
+            head.next.next = left_node  # 1->3->2->N
+            return head
     return head
 
 
@@ -111,10 +155,18 @@ def test_swap_nodes():
         # specific cases
         (([1, 2], 0, 1), [2, 1]),
         (([1, 2], 1, 0), [2, 1]),  # if right_index is 0 return original list
+
         (([1, 2, 3], 0, 1), [2, 1, 3]),
         (([1, 2, 3], 1, 0), [2, 1, 3]),
-        # (([1, 2, 3], 1, 2), [2, 1, 3]),
-        # (([1, 2, 3], 2, 1), [2, 1, 3]),
+        (([1, 2, 3], 1, 2), [1, 3, 2]),
+        (([1, 2, 3], 2, 1), [1, 3, 2]),
+
+        (([1, 2, 3, 4], 0, 1), [2, 1, 3, 4]),
+        (([1, 2, 3, 4], 1, 0), [2, 1, 3, 4]),
+        (([1, 2, 3, 4], 1, 2), [1, 3, 2, 4]),
+        (([1, 2, 3, 4], 2, 1), [1, 3, 2, 4]),
+        (([1, 2, 3, 4], 2, 3), [1, 2, 4, 3]),
+        (([1, 2, 3, 4], 3, 2), [1, 2, 4, 3]),
         # (([1, 2, 3], 0, 2), [3, 2, 1]),
         # (([1, 2, 3], 2, 0), [3, 2, 1]),
 
