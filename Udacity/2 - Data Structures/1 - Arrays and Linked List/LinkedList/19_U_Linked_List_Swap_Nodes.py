@@ -75,9 +75,11 @@ def swap_nodes(head, left_index, right_index):
     # no asumir - no poner mi mente en el algoritmo
     # usar todos los parametros
 
-    if size(head) >= 2:
+    original_size = size(head)
+    if original_size >= 2:
         right_list = get_list_right_node(head, left_index)
-        left_list = get_list_left_node(right_list)
+        new_index = right_index - 1 if size(right_list) == original_size else right_index
+        left_list = get_list_left_node(right_list, new_index)
 
         if left_index == 0:
             head = left_list
@@ -111,21 +113,30 @@ def get_list_right_node(head, left_index):
     return right_node
 
 
-def get_list_left_node(right_node):
+def get_list_left_node(right_node, right_index):
+    left_node = None
     right_node_tail = right_node.next  # 2->3->N
     right_node.next = None  # 1->N
     # 2) find left_node - needs right_index
     # find previous to left
-
-    left_node = right_node_tail  # 2->3->N
+    previous_node = get_previous_node(right_node_tail, right_index)
+    if previous_node is None:
+        left_node = right_node_tail  # 3->N
+    else:
+        left_node = previous_node.next
+        previous_node.next = None
     # 3) preserve left_node_tail
-    left_node_tail = left_node.next  # 3->N
-    left_node.next = None  # 2->N
+    left_node_tail = left_node.next  # 3->N | 2->3->N
+    left_node.next = None  # 3->N
     # 4) assemble list
-    right_node.next = left_node_tail  # 1->3->N
-    left_node.next = right_node  # 2->1->3->N
-    return left_node
-
+    if previous_node is None:
+        right_node.next = left_node_tail  # 1->3->N
+        left_node.next = right_node  # 2->1->3->N
+        return left_node
+    else:
+        previous_node.next = right_node
+        left_node.next = previous_node
+        return left_node
 
 def test_swap_nodes():
     print("\n--------------------------")
