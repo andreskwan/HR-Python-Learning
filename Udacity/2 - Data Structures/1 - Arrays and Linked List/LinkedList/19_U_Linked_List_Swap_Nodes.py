@@ -83,16 +83,16 @@ def swap_nodes(head, left_index, right_index):
             head = left_list
             return head
 
-        previous_right = get_previous_right(head, left_index)
+        previous_right = get_previous_node(head, left_index)
         previous_right.next = left_list
         return head
     return head
 
 
-def get_previous_right(head, left_index):
+def get_previous_node(list, index):
     counter = 0
-    previous_right = head
-    while counter < left_index - 1:
+    previous_right = list
+    while counter < index - 1:
         counter += 1
         previous_right = previous_right.next
     return previous_right
@@ -111,6 +111,8 @@ def get_list_left_node(right_node):
     right_node_tail = right_node.next  # 2->3->N
     right_node.next = None  # 1->N
     # 2) find left_node - needs right_index
+    # find previous to left
+
     left_node = right_node_tail  # 2->3->N
     # 3) preserve left_node_tail
     left_node_tail = left_node.next  # 3->N
