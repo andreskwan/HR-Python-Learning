@@ -115,8 +115,8 @@ def get_list_right_node(head, left_index):
 
 def get_list_left_node(right_node, right_index):
     left_node = None
-    right_node_tail = right_node.next  # 2->3->N
-    right_node.next = None  # 1->N
+    right_node_tail = right_node.next
+    right_node.next = None
     # 2) find left_node - needs right_index
     # find previous to left
     previous_node = get_previous_node(right_node_tail, right_index)
@@ -135,8 +135,11 @@ def get_list_left_node(right_node, right_index):
         return left_node
     else:
         previous_node.next = right_node
+        if left_node_tail is not None:
+            right_node.next = left_node_tail
         left_node.next = previous_node
         return left_node
+
 
 def test_swap_nodes():
     print("\n--------------------------")
@@ -144,36 +147,42 @@ def test_swap_nodes():
 
     test_cases = [
         # degenerate cases first
-        ((None, None, None), []),
-        (([1], None, None), [1]),
-        (([1], 1, None), [1]),
-        (([], None, 1), []),
-        (([], 0, 1), []),  # if empty list return original list
-        (([1, 2], 0, 0), [1, 2]),  # if i == j return original list
-        (([1, 2], 1, 1), [1, 2]),  # if i == j return original list
-
-        # specific cases
-        (([1, 2], 0, 1), [2, 1]),
-        (([1, 2], 1, 0), [2, 1]),  # if right_index is 0 return original list
-
-        (([1, 2, 3], 0, 1), [2, 1, 3]),
-        (([1, 2, 3], 1, 0), [2, 1, 3]),
-        (([1, 2, 3], 1, 2), [1, 3, 2]),
-        (([1, 2, 3], 2, 1), [1, 3, 2]),
-
-        # get_previous_right
-        (([1, 2, 3, 4], 0, 1), [2, 1, 3, 4]),
-        (([1, 2, 3, 4], 1, 0), [2, 1, 3, 4]),
-        (([1, 2, 3, 4], 1, 2), [1, 3, 2, 4]),
+        # ((None, None, None), []),
+        # (([1], None, None), [1]),
+        # (([1], 1, None), [1]),
+        # (([], None, 1), []),
+        # (([], 0, 1), []),  # if empty list return original list
+        # (([1, 2], 0, 0), [1, 2]),  # if i == j return original list
+        # (([1, 2], 1, 1), [1, 2]),  # if i == j return original list
+        #
+        # # specific cases
+        # (([1, 2], 0, 1), [2, 1]),
+        # (([1, 2], 1, 0), [2, 1]),  # if right_index is 0 return original list
+        #
+        # (([1, 2, 3], 0, 1), [2, 1, 3]),
+        # (([1, 2, 3], 1, 0), [2, 1, 3]),
+        # (([1, 2, 3], 1, 2), [1, 3, 2]),
+        # (([1, 2, 3], 2, 1), [1, 3, 2]),
+        #
+        # # get_previous_right
+        # (([1, 2, 3, 4], 0, 1), [2, 1, 3, 4]),
+        # (([1, 2, 3, 4], 1, 0), [2, 1, 3, 4]),
+        # (([1, 2, 3, 4], 1, 2), [1, 3, 2, 4]),
         # (([1, 2, 3, 4], 2, 1), [1, 3, 2, 4]),
         # (([1, 2, 3, 4], 2, 3), [1, 2, 4, 3]),
         # (([1, 2, 3, 4], 3, 2), [1, 2, 4, 3]),
-        # # right_index
+        # # # right_index
         # (([1, 2, 3], 0, 2), [3, 2, 1]),
         # (([1, 2, 3], 2, 0), [3, 2, 1]),
-
+        # (([1, 2, 3, 4], 0, 1), [2, 1, 3, 4]),
+        # (([1, 2, 3, 4], 1, 2), [1, 3, 2, 4]),
+        # (([1, 2, 3, 4], 2, 3), [1, 2, 4, 3]),
+        (([1, 2, 3, 4], 0, 2), [3, 2, 1, 4]),
+        # (([1, 2, 3, 4], 2, 0), [3, 2, 1]),
         # Udacity cases
-
+        # (([3, 4, 5, 2, 6, 1, 9], 0, 1), [4, 3, 5, 2, 6, 1, 9]),
+        # (([3, 4, 5, 2, 6, 1, 9], 3, 4), [3, 4, 5, 6, 2, 1, 9]),
+        # (([3, 4, 5, 2, 6, 1, 9], 2, 4), [3, 4, 6, 2, 5, 1, 9]),
         # integration test
 
     ]
