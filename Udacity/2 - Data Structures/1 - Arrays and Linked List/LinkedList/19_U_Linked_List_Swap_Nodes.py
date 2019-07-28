@@ -90,6 +90,8 @@ def swap_nodes(head, left_index, right_index):
 
 
 def get_previous_node(list, index):
+    if size(list) == 1:
+        return None
     if index == 0:
         return None
     counter = 0
