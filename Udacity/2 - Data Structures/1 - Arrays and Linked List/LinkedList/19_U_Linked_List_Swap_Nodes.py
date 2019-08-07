@@ -149,6 +149,67 @@ def get_list_left_node(right_node, right_index):
     return left_node
 
 
+# Solution
+
+def swap_nodes_udacity(head, left_index, right_index):
+    if head is None:
+        return []
+
+    if left_index is None:
+        return head
+
+    if right_index is None:
+        return head
+
+    if left_index == right_index:
+        return head
+
+    # if both the indices are same
+    if left_index == right_index:
+        return head
+
+    left_previous = None
+    left_current = None
+
+    right_previous = None
+    right_current = None
+
+    count = 0
+    temp = head
+    new_head = None
+
+    # find out previous and current node at both the indices
+    while temp is not None:
+        if count == left_index:
+            left_current = temp
+        elif count == right_index:
+            right_current = temp
+            break
+
+        if left_current is None:
+            left_previous = temp
+        right_previous = temp
+        temp = temp.next
+        count += 1
+
+    right_previous.next = left_current
+    temp = left_current.next
+    left_current.next = right_current.next
+
+    # if both the indices are next to each other
+    if left_index != right_index:
+        right_current.next = temp
+
+    # if the node at first index is head of the original linked list
+    if left_previous is None:
+        new_head = right_current
+    else:
+        left_previous.next = right_current
+        new_head = head
+
+    return new_head
+
+
 def test_swap_nodes():
     print("\n--------------------------")
     print("-------test_swap_nodes-------")
@@ -188,8 +249,8 @@ def test_swap_nodes():
         (([1, 2, 3, 4], 2, 3), [1, 2, 4, 3]),
         (([1, 2, 3, 4], 0, 2), [3, 2, 1, 4]),
         (([1, 2, 3, 4], 2, 0), [3, 2, 1, 4]),
-
-        # Udacity cases
+        #
+        # # Udacity cases
         (([3, 4, 5, 2, 6, 1, 9], 0, 1), [4, 3, 5, 2, 6, 1, 9]),
         (([3, 4, 5, 2, 6, 1, 9], 3, 4), [3, 4, 5, 6, 2, 1, 9]),
         (([3, 4, 5, 2, 6, 1, 9], 2, 4), [3, 4, 6, 2, 5, 1, 9]),
@@ -202,6 +263,7 @@ def test_swap_nodes():
         list_head = create_linked_list(args[0])
         left_index = args[1]
         right_index = args[2]
+        # result_list = to_list(swap_nodes(list_head, left_index, right_index))
         result_list = to_list(swap_nodes(list_head, left_index, right_index))
 
         if result_list is not None and answer is not None:
