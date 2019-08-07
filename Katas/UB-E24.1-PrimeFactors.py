@@ -1,7 +1,8 @@
-def test_prime_factors():
+def t_prime_factors():
     print("--------------------------")
     print("-------test_prime_factors-------")
     test_cases = [
+        (None, []),
         (1, []),
         (2, [2]),
         (3, [3]),
@@ -23,31 +24,25 @@ def test_prime_factors():
         print("---------------------")
         result = prime_factors(args)
 
-        if result is not None and answer is not None:
-            print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(
-                result) + " |")
-            if result == answer:
-                print("Test case passed!")
-            else:
-                print("**********************Test with input data:", args, "failed")
+        print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(result) + " |")
+        if result == answer:
+            print("Test case passed!")
         else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
-            if result == answer:
-                print("Test case passed!")
-            else:
-                print("**********************Test with input data:", args, "failed")
+            print("**********************Test with input data:", args, "failed")
 
 
 def prime_factors(n):
     factors = []
+    if n is None:
+        return factors
     if n == 1:
         return factors
     divisor = 2
     while n > 1:
         while n % divisor == 0:
             factors.append(divisor)
-            n //= divisor
+            n /= divisor
         divisor += 1
     return factors
 
-test_prime_factors()
+t_prime_factors()
