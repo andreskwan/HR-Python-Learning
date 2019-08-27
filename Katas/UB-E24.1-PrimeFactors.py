@@ -17,6 +17,10 @@ def t_prime_factors():
         (12, [2, 2, 3]),
         (13, [13]),
         (14, [2, 7]),
+        (15, [3, 5]),
+        (16, [2, 2, 2, 2]),
+        (17, [17]),
+        (18, [2, 3, 3]),
         ((2 * 3 * 3 * 5 * 7 * 11 * 11 * 13), [2, 3, 3, 5, 7, 11, 11, 13])
     ]
 
@@ -41,7 +45,7 @@ def prime_factors(n):
     while n > 1:
         while n % divisor == 0:
             factors.append(divisor)
-            n /= divisor
+            n //= divisor
         divisor += 1
     return factors
 
