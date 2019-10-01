@@ -10,6 +10,7 @@ def test_sort():
     large_sorted = sorted(large)
     # sorted_list = [*range(10000)]
     test_cases = [
+        (None, []),
         ([], []),
         ([1], [1]),
         ([1, 2], [1, 2]),
@@ -28,18 +29,13 @@ def test_sort():
 
     for (args, answer) in test_cases:
         print("---------------------")
-        unmodified = args[:]
         result = sort(args)
 
-        if result is not None and answer is not None:
-            print("input:    " + str(unmodified) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(
-                result) + " |")
-        else:
-            print("result: " + str(result) + " |\nexpected: " + str(answer) + "|")
+        print("input:    " + str(args) + " |\nexpected: " + str(answer) + " |\nresult:   " + str(result) + " |")
         if result == answer:
             print("Test case passed!")
         else:
-            print("**********************Test with input data:", unmodified, "failed")
+            print("**********************Test with input data:", args, "failed")
 
 
 # TODO - fix sort sorted array recursion problem.
