@@ -2,7 +2,7 @@ from music21 import *
 
 n = note.Note("C4") # what type is 'n' so it could be open by MS
 n.duration.type = 'half'
-
+# n.pitch
 # This opens Music Score App! 
 n.show()
 
