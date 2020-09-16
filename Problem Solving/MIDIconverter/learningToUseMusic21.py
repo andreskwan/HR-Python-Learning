@@ -113,20 +113,20 @@ def getElement(dictionary):
 extracted_notes = list(filter(None,list(map(getElement, g_p1_sec))))
 print(extracted_notes)
 
-# g_p1_sec
-# score.duration
-# score.duration.quarterLength
+g_p1_sec
+score.duration
+score.duration.quarterLength
 # # score[0].finalBarLine
 # type(score)
 # # score.seconds
-# score[0].seconds
+score[0].seconds
 # score[0].timeSignature
-# score[0].metadata
+score[0].metadata
 # g_p1_sec_11
 # g_p1_sec_11['element']
 # type(g_p1_sec_11['element'])
-# c_unknown = g_p1_sec_11['element']
-# c_unknown.duration
+c_unknown = g_p1_sec_11['element']
+c_unknown.duration
 # c_unknown.duration.type
 # c_unknown.duration.dots
 # c_unknown.commonName
