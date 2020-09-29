@@ -8,7 +8,7 @@ from music21 import converter, corpus, instrument, midi, note, chord, pitch
 # Listing current data on our folder.
 import os
 
-us = environment.UserSettings()
+# us = environment.UserSettings()
 # mscore_local = '/Applications/MuseScore 3.5.app/Contents/MacOS/mscore'
 # us['mscore'] = mscore_local
 # for key in sorted(us.keys()):

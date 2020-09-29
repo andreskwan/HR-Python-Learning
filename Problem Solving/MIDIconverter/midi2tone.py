@@ -3,20 +3,21 @@ import os
 from functools import *
 import operator
 
-print("\n-------------------- UserSettings --------------------")
-us = environment.UserSettings()
+# print("\n-------------------- UserSettings --------------------")
+# us = environment.UserSettings()
 # us['mscore'] = '/Applications/MuseScore\ 3.5.app/Contents/MacOS/mscore'
 # print("us['mscore']",us['mscore'])
-print()
+# print()
 
 underworld = "Mario-Sheet-Music-Underworld-Theme.mid"
 death = "death.mid"
-midi_path = "/Users/andres.kwan/Downloads/" + underworld
+tetris = "tetris.mid"
+midi_path = "/Users/andres.kwan/Downloads/" + death
 
 
 def open_midi(midi_path, remove_drums):
     mf = midi.MidiFile()
-    mf.open(midi_path)
+    mf.open(midi_path) 
     mf.read()
     mf.close()
     # print("print tracks", mf.tracks)
@@ -26,23 +27,29 @@ def open_midi(midi_path, remove_drums):
             mf.tracks[i].events = [ev for ev in mf.tracks[i].events if ev.channel != 10]          
 
     return midi.translate.midiFileToStream(mf)
-    
-score = open_midi(midi_path, True)
-score.show()
-score[0].flat.elements
-g_part = score[0]
 
+def printData(scorePart):
+    #2) get piano
+    print("\n-------------------- scorePart.flat.elements --------------------")
+    print(scorePart.flat.elements)
 
-g_p1_sec = g_part.secondsMap
-# g_p1_sec[5]
-# g_p1_sec[7]
-# g_p1_sec[11]
-# type(g_p1_sec[11])
+    print("\n-------------------- scorePart.elements --------------------")
+    print(scorePart.elements)
 
-# g_p1_sec_11 = g_p1_sec[11]
-print("g_p1_sec[9]",g_p1_sec[9])
-# g_p1_sec_11
-# # %history
+    print("\n-------------------- scorePart.flat.elements.stream().show('text') --------------------")
+    print(scorePart.flat.elements.stream().show('text'))
+
+    print("\n-------------------- scorePart.flat.notes.stream().show('text') --------------------")
+    print(scorePart.flat.notes.show('text'))
+
+    # print("\n-------------------- scorePart.show('text') --------------------")
+    # print(scorePart.show('text'))
+
+    print("\n-------------------- scorePart --------------------")
+    print(scorePart)
+
+    print("\n-------------------- scorePart.secondsMap --------------------")
+    print(scorePart.secondsMap)
 
 #how to make this function lazy
 # if found do not keep looking 
@@ -51,9 +58,6 @@ def getTimeSignature(dictionary):
     ts = meter.TimeSignature()
     if type(el) == type(ts):
         return el
-
-timeSignature = list(filter(None,list(map(getTimeSignature, g_p1_sec))))
-print("timeSignature:",timeSignature[0])
 
 # def splitComplexDuration(duration.Duration):
 
@@ -69,17 +73,17 @@ def getElement(dictionary):
         ordered_chord = el.sortAscending()
         el = ordered_chord[-1]
         if el.duration.type == complexDuration.type:
-            # print("\n---split-chord---\n") 
+            print("\n---split-chord---\n") 
             return [duration for duration in el.splitAtDurations()]
         return [el]
     if type(el) == type(nota):
         if el.duration.type == complexDuration.type: 
-            # print("\n---split-note---\n")
+            print("\n---split-note---\n")
             return [duration for duration in el.splitAtDurations()]
         return [el]
     if type(el) == type(sil):
         if el.duration.type == complexDuration.type: 
-            # print("\n---split-rest---\n")
+            print("\n---split-rest---\n")
             return [duration for duration in el.splitAtDurations()]
         return [el]
 
@@ -103,11 +107,11 @@ def getTuplaPitchDuration(dictionary):
         return ("0",str(el.duration.type))
 
 # print("\n-------------------- notes_from_midi --------------------")
-# notes = list(filter(None,list(map(getTuplaPitchDuration, g_p1_sec))))
+# # notes = list(filter(None,list(map(getTuplaPitchDuration, list_part0_seconds))))
 # print("notes_from_midi:\n",notes)
 
 # print("\n-------------------- pitch & duration --------------------")
-# pitch_and_duration = list(filter(None,list(map(getTuplaPitchDuration, g_p1_sec))))
+# # pitch_and_duration = list(filter(None,list(map(getTuplaPitchDuration, list_part0_seconds))))
 # print("pitch_and_duration:\n",pitch_and_duration)
 # print()
 
@@ -160,7 +164,7 @@ def getDurationFromTuple(tuple_value):
 
 # print(map(getSplittedNote, extracted_notes))
 # print("\n-------------------- split notes --------------------")
-# split_note = list(map(getSplittedNote, pitch_and_duration))
+# # split_note = list(map(getSplittedNote, pitch_and_duration))
 # print("split_notes:\n",split_note)
 # print()
 
@@ -228,8 +232,6 @@ def durationToToneDuration(m21_duration):
 
 # splitted_notes = list(map(reduce, splitted_notes))
 
-
-
 # from functools import partial
 # nested_list = list(map( partial(map, str.lower), split_notes))
 
@@ -237,55 +239,102 @@ def durationToToneDuration(m21_duration):
 # list(map(funcion,x) for x in [["a","b","c"],["a","b","c"]])
 # [funcion(val) for sublist in [["a","b","c"],["a","b","c"]] for val in sublist]
 
-print("\n-------------------- Elements --------------------")
-elements = list(filter(None,list(map(getElement, g_p1_sec))))
-print("elements:\n", elements)
-print()
+def getTones(list_part0_seconds):
+    # print("\n-------------------- Elements --------------------")
+    elements = list(filter(None,list(map(getElement, list_part0_seconds))))
+    # print("elements:\n", elements)
+    # print()
 
-print("\n-------------------- flat list --------------------")
-flat_list = [item for sublist in elements for item in sublist]
-print("flat list:", flat_list)
-print()
+    # print("\n-------------------- flat list --------------------")
+    flat_list = [item for sublist in elements for item in sublist]
+    # print("flat list:", flat_list)
+    # print()
 
-print("\n-------------------- stream --------------------")
-stream1 = stream.Stream()
-stream1.append(meter.TimeSignature('fast 2/2'))
-stream1.append(flat_list)
-stream1.show()
-# print(stream1)
+    # print("\n-------------------- stream --------------------")
+    stream1 = stream.Stream()
+    stream1.append(meter.TimeSignature('fast 2/2'))
+    stream1.append(flat_list)
+    # stream1.show()
+    print(stream1)
+    # print(stream1.barDuration)
 
-#this output work for nokia. 
-print("\n-------------------- notes tuples --------------------")
-notes = list(filter(None,list(map(getTuplaPitchDurationFromElement, flat_list))))
-print("notes tuples:\n",notes)
-print()
+    #this output work for nokia. 
+    # print("\n-------------------- notes tuples --------------------")
+    notes = list(filter(None,list(map(getTuplaPitchDurationFromElement, flat_list))))
+    # print("notes tuples:\n",notes)
+    # print()
 
-print("\n-------------------- split_notes --------------------")
-split_note = list(map(getNoteFromTuple, notes))
-print("split_notes:\n",split_note)
-print()
+    # print("\n-------------------- split_notes --------------------")
+    split_note = list(map(getNoteFromTuple, notes))
+    # print("split_notes:\n",split_note)
+    # print()
 
-print("\n-------------------- tones --------------------")
-partial_list = [list([charToNokia(e) for e in sub_array]) for sub_array in split_note]
-print("partial_list:\n",partial_list)
-tones = ["".join([e for e in sub_array]) for sub_array in partial_list]
-print("tones:\n",tones)
-print()
-# print("tones.count: ",tones.count)
+    # print("\n-------------------- tones --------------------")
+    partial_list = [list([charToNokia(e) for e in sub_array]) for sub_array in split_note]
+    # print("partial_list:\n",partial_list)
+    tones = ["".join([e for e in sub_array]) for sub_array in partial_list]
+    # print("tones:\n",tones)
+    # print()
+    # print("tones.count: ",tones.count)
 
-print("\n-------------------- duration --------------------")
-notes_duration = list(map(getDurationFromTuple, notes)) 
-print("notes_duration:\n",notes_duration)
-print()
+    # print("\n-------------------- duration --------------------")
+    notes_duration = list(map(getDurationFromTuple, notes)) 
+    # print("notes_duration:\n",notes_duration)
+    # print()
 
-print("\n-------------------- duration in tones notation --------------------")
-tones_duration = list(map(durationToToneDuration, notes_duration))
-print("tones_duration:\n",tones_duration)
-print()
-# print("tones_duration.count: ",tones_duration.count)
+    # print("\n-------------------- duration in tones notation --------------------")
+    tones_duration = list(map(durationToToneDuration, notes_duration))
+    # print("tones_duration:\n",tones_duration)
+    # print()
+    # print("tones_duration.count: ",tones_duration.count)
 
-print("\n-------------------- combined tones and durations --------------------")
-list(sum(zip(tones, tones_duration), ()))
+    # print("\n-------------------- combined tones and durations --------------------")
+    return list(sum(zip(tones, tones_duration), ()))
+
+
+#1) get the score    
+score = open_midi(midi_path, True)
+print("type(score):", type(score))
+score.show()
+score.show('text')
+part0 = score[0]
+part1 = score[1]
+
+# # print("\n-------------------- printData(part0) --------------------")
+# # print("\n-------------------- printData(part0) --------------------")
+# # printData(part0)
+# # print("\n-------------------- printData(part1) --------------------")
+# # print("\n-------------------- printData(part1) --------------------")
+# # printData(part1)
+# # map(printData, score)
+
+# # [printData(x) for x in score]
+# score_seconds = score.secondsMap
+list_part0_seconds = part0.secondsMap
+list_part1_seconds = part1.secondsMap
+
+# print(getTones(score_seconds))
+print(getTones(list_part0_seconds))
+print(getTones(list_part1_seconds))
+
+timeSignature = list(filter(None,list(map(getTimeSignature, list_part0_seconds))))
+print("timeSignature:",timeSignature[0])
+
+timeSignature = list(filter(None,list(map(getTimeSignature, score_seconds))))
+print("timeSignature:",timeSignature)
+
+#################################################################################
+# list_part0_seconds.barDuration
+
+# list_part0_seconds[5]
+# list_part0_seconds[7]
+# list_part0_seconds[11]
+# type(list_part0_seconds[11])
+
+# list_part0_seconds_11 = list_part0_seconds[11]
+# print("list_part0_seconds[9]",list_part0_seconds[9])
+# list_part0_seconds_11
+# # %history
 
 # [list(a) for a in sum(zip(tones, tones_duration))]
 # def getTone(el):
@@ -307,4 +356,3 @@ list(sum(zip(tones, tones_duration), ()))
 # [" ".join([str(x*y) for y in range(1,x+1)]) for x in range(1,8) ]
 
 # notes = ["".join([e for e in sub_array]) for sub_array in partial_list]
-
